@@ -17,6 +17,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    aaptOptions.setProperty("cruncherEnabled", false)
+    aaptOptions.setProperty("useNewCruncher", false)
 }
 
 dependencies {

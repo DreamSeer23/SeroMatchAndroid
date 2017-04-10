@@ -26,7 +26,7 @@ public class BottomTabAdapter extends FragmentStatePagerAdapter
                 Community_Tab tab4= new Community_Tab();
                 return tab4;
             case 1:
-                Search_Tab tab5 = new Search_Tab();
+                Profile_Match_Settings_Tab tab5 = new Profile_Match_Settings_Tab();
                 return tab5;
             case 2:
                 Messages tab6 = new Messages();

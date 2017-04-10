@@ -1,10 +1,12 @@
 package seromatch.seromatchtest;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -14,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         //Bottom Tabs
         TabLayout tabLayoutBottom = (TabLayout) findViewById(R.id.bottom_tab_layout);
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_community));
-        tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_search_friends));
+        tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_profile_match));
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_action_name));
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_account));
         tabLayoutBottom.setTabGravity(TabLayout.GRAVITY_FILL);;
@@ -44,5 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void onSearch(View v)
+    {
+        System.out.println("test");
+        Intent search =new Intent(getApplicationContext(),Search.class);
+        startActivity(search);
     }
 }

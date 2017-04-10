@@ -5,6 +5,7 @@ package seromatch.seromatchtest;
  */
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -15,11 +16,37 @@ import android.view.ViewGroup;
 
 public class Community_Tab extends Fragment
 {
-
+    private boolean activityStartup = false;
+    android.widget.SearchView sV;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v=inflater.inflate(R.layout.community_tab, container, false);
+        //Search
+        sV= (android.widget.SearchView) v.findViewById(R.id.search_bar_community);
+        sV.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                {
+                    if (activityStartup)
+                    {
+                        sV.clearFocus();
+                        activityStartup = false;
+                        System.out.println("Test");
+                        // TODO: 4/10/2017 Send a bundle with 1 so it knows what tab it came from. Since right now it goes auto back to 1
+                        Intent change = new Intent(getContext(), Search.class);
+                        startActivity(change);
+                    }
+                    else
+                    {
+                        sV.clearFocus();
+                        activityStartup = true;
+                        System.out.println("Test3");
+                    }
+                }
+            }
+        });
         //Top Tabs
         TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tab_layout_community);
         tabLayout.addTab(tabLayout.newTab().setText("Feed"));

@@ -20,4 +20,7 @@
     <string name="my_matches">My Matches</string>
     <string name="my_messages">My Messages</string>
     <string name="my_account">My Account</string>
+    <string name="profiles">Profiles</string>
+    <string name="search_button">Search Button</string>
+    <string name="back_button">Back Button</string>
 </resources>
