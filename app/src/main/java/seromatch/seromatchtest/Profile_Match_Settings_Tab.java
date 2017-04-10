@@ -80,21 +80,4 @@ public class Profile_Match_Settings_Tab extends Fragment
         });
         return v;
     }
-    public void searchBar(View v, boolean hasFocus)
-    {
-        if (hasFocus)
-        {
-            if (activityStartup)
-            {
-                sV.clearFocus();
-                activityStartup = false;
-            }
-            else
-            {
-                Intent change = new Intent(getContext(), Search.class);
-                startActivity(change);
-            }
-
-        }
-    }
 }
