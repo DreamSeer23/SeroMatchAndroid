@@ -47,10 +47,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void onSearch(View v)
-    {
-        System.out.println("test");
-        Intent search =new Intent(getApplicationContext(),Search.class);
-        startActivity(search);
-    }
 }
