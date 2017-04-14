@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -37,12 +36,10 @@ public class Login extends AppCompatActivity
     {
         if (password.getInputType()== 129)
         {
-            Log.d("TEXT","text");
             password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         }
         else
         {
-            Log.d("TEXT","password");
             password.setInputType(129);
         }
     }
