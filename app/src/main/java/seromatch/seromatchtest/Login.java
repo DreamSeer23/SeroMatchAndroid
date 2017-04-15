@@ -30,7 +30,10 @@ public class Login extends AppCompatActivity
     }
     //Sign up on click
     //Open Fragment with the Sign in details
+    public void signUp(View v)
+    {
 
+    }
     //Show Password OnClick
     public void showPassword(View v)
     {
