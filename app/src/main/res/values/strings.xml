@@ -20,4 +20,5 @@
     <string name="my_matches">My Matches</string>
     <string name="my_messages">My Messages</string>
     <string name="my_account">My Account</string>
+    <string name="tap_anywhere_to_begin">Tap Anywhere To Begin</string>
 </resources>
