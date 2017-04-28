@@ -24,9 +24,7 @@ public class Login extends AppCompatActivity
     public void login(View v)
     {
         Intent start= new Intent(getApplicationContext(),MainActivity.class);
-        //Hash entered password then check vs the saved hashed
         startActivity(start);
-
     }
     //Sign up on click
     //Open Fragment with the Sign in details

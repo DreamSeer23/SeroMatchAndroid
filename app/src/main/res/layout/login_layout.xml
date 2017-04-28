@@ -11,7 +11,7 @@
         android:layout_marginStart="80dp"
         android:textSize="30sp"
         android:contentDescription="Seromatch"
-        android:src="@drawable/seromatch" />
+        android:src="@drawable/seromatch2" />
 
     <EditText
         android:layout_width="match_parent"
