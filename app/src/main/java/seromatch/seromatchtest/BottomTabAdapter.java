@@ -29,7 +29,7 @@ public class BottomTabAdapter extends FragmentStatePagerAdapter
                 Profile_Match_Settings_Tab tab5 = new Profile_Match_Settings_Tab();
                 return tab5;
             case 2:
-                Messages tab6 = new Messages();
+                Messages_Tab tab6 = new Messages_Tab();
                 return tab6;
             case 3:
                 Accounts tab7 = new Accounts();

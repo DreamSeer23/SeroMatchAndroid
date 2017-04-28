@@ -1,22 +1,21 @@
 package seromatch.seromatchtest;
 
-/**
- * Created by jason_000 on 4/6/2017.
- */
-
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Messages extends Fragment
+/**
+ * Created by jason_000 on 4/14/2017.
+ */
+
+public class SignUp extends Fragment
 {
-    //Main Messages Code here @ToDo
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v=inflater.inflate(R.layout.message_tab, container, false);
+        View v=inflater.inflate(R.layout.signup_layout, container, false);
         return v;
     }
+
 }
