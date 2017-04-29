@@ -2,23 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black">
-    <!--Main XML for Match here @ToDO-->
-    <!--TextView
-        android:id="@+id/test3_tab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/my_matches"
-        android:textAppearance="?android:attr/textAppearanceLarge"/-->
-
+    android:layout_height="match_parent">
     <fragment
-        android:id="@+id/details_fragment"
+        android:id="@+id/match_fragment"
         class="seromatch.seromatchtest.SwipeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/swipe_in_msg" />
-
-
 </RelativeLayout>
