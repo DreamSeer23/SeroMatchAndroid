@@ -32,4 +32,5 @@
     <string name="no_account">Don\'t have an account?</string>
     <string name="tap_anywhere_to_begin">Tap Anywhere To Begin</string>
     <string name="match_pics">Match Pics</string>
+    <string name="message_title">Messages</string>
 </resources>
