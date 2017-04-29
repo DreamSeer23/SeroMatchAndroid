@@ -26,11 +26,9 @@ public class TabAdapter extends FragmentStatePagerAdapter
                      return ptab;
                 case 1:
                     Match_Tab mtab = new Match_Tab();
-                    System.out.println("MATCH");
                     return mtab;
                 case 2:
                     Settings_Tab tab3 = new Settings_Tab();
-                    System.out.println("Settings");
                     return tab3;
                 default:
                     return null;

@@ -9,13 +9,14 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 public class Profile_Match_Settings_Tab extends Fragment
 {
-    private boolean activityStartup = true;
+    private boolean activityStartup = false;
     android.widget.SearchView sV;
 
     @Override
@@ -24,18 +25,21 @@ public class Profile_Match_Settings_Tab extends Fragment
 
         View v=inflater.inflate(R.layout.search_friends_tab, container, false);
         sV= (android.widget.SearchView) v.findViewById(R.id.search_bar);
-        System.out.println(activityStartup);
         sV.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus)
                 {
+                    Log.d("Startup",String.valueOf(activityStartup)+"6");
                     if (activityStartup)
                     {
                         sV.clearFocus();
                         activityStartup = false;
                         // TODO: 4/10/2017 Send a bundle with 2 so it knows what tab it came from. Since right now it goes auto back to 1
+                        // TODO: Set activityStartup to false when you come back from search class
                         Intent change = new Intent(getContext(), Search.class);
+                        change.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        change.putExtra("Tab Number",1);
                         startActivity(change);
                     }
                     else
@@ -43,7 +47,6 @@ public class Profile_Match_Settings_Tab extends Fragment
                         sV.clearFocus();
                         activityStartup = true;
                     }
-
                 }
             }
         });
@@ -79,5 +82,11 @@ public class Profile_Match_Settings_Tab extends Fragment
             }
         });
         return v;
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        activityStartup=false;
     }
 }

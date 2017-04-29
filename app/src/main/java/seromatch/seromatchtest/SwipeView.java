@@ -2,11 +2,8 @@ package seromatch.seromatchtest;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
@@ -32,7 +29,7 @@ public class SwipeView extends AppCompatActivity
                         .setSwipeInMsgLayoutId(R.layout.swipe_in_msg)
                         .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg));
 
-
+//HERE
         for(Profile profile : Utils.loadProfiles(this.getApplicationContext())){
             mSwipeView.addView(new MatchCard(mContext, profile, mSwipeView));
         }

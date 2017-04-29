@@ -10,13 +10,14 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 public class Community_Tab extends Fragment
 {
-    private boolean activityStartup = false;
+    private boolean activityStartup;
     android.widget.SearchView sV;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -24,27 +25,30 @@ public class Community_Tab extends Fragment
         View v=inflater.inflate(R.layout.community_tab, container, false);
         //Search
         sV= (android.widget.SearchView) v.findViewById(R.id.search_bar_community);
+        activityStartup = false;
         sV.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus)
                 {
+                    Log.d("Startup",String.valueOf(activityStartup)+"0");
                     if (activityStartup)
                     {
                         sV.clearFocus();
                         activityStartup = false;
-                        System.out.println("Test");
                         // TODO: 4/10/2017 Send a bundle with 1 so it knows what tab it came from. Since right now it goes auto back to 1
                         Intent change = new Intent(getContext(), Search.class);
+                        change.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        change.putExtra("Tab Number",0  );
                         startActivity(change);
                     }
                     else
                     {
                         sV.clearFocus();
                         activityStartup = true;
-                        System.out.println("Test3");
                     }
                 }
+
             }
         });
         //Top Tabs
@@ -78,5 +82,11 @@ public class Community_Tab extends Fragment
             }
         });
         return v;
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        activityStartup=false;
     }
 }

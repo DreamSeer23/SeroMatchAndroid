@@ -18,9 +18,10 @@ android {
         }
     }
         sourceSets {
-        main {
-            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
-            res.srcDirs = ['src/main/res', 'src/main/res/drawable']
+            main {
+                assets.srcDirs = ['src/main/assets', 'src/main/assets/']
+                res.srcDirs = ['src/main/res', 'src/main/res/drawable']
+            }
         }
     aaptOptions.setProperty("cruncherEnabled", false)
     aaptOptions.setProperty("useNewCruncher", false)

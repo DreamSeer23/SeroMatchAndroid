@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -27,7 +26,15 @@ public class MainActivity extends AppCompatActivity {
                 (getSupportFragmentManager(), tabLayoutBottom.getTabCount());
         viewPagerBottom.setAdapter(adapterBottom);
         viewPagerBottom.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayoutBottom));
-        viewPagerBottom.setCurrentItem(0);
+        Intent intent = getIntent();
+        if(intent.hasExtra("Tab Number"))
+        {
+            viewPagerBottom.setCurrentItem(intent.getIntExtra("Tab Number", 0));
+        }
+        else
+        {
+            viewPagerBottom.setCurrentItem(0);
+        }
         tabLayoutBottom.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tabBottom)
@@ -46,5 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
     }
 }

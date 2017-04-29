@@ -24,7 +24,9 @@ public class Login extends AppCompatActivity
     public void login(View v)
     {
         Intent start= new Intent(getApplicationContext(),MainActivity.class);
+        start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(start);
+        finish();
     }
     //Sign up on click
     //Open Fragment with the Sign in details
