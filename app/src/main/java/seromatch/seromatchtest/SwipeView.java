@@ -1,25 +1,27 @@
 package seromatch.seromatchtest;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
-public class SwipeView extends AppCompatActivity
+public class SwipeView extends Fragment
 {
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.swipetab);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View v = inflater.inflate(R.layout.swipetab, container, false);
 
-        mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
-        mContext = getApplicationContext();
+        mSwipeView = (SwipePlaceHolderView)v.findViewById(R.id.swipeView);
+        mContext = v.getContext();
 
         mSwipeView.getBuilder()
                 .setDisplayViewCount(3)
@@ -29,23 +31,23 @@ public class SwipeView extends AppCompatActivity
                         .setSwipeInMsgLayoutId(R.layout.swipe_in_msg)
                         .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg));
 
-//HERE
-        for(Profile profile : Utils.loadProfiles(this.getApplicationContext())){
+        for(Profile profile : Utils.loadProfiles(v.getContext())){
             mSwipeView.addView(new MatchCard(mContext, profile, mSwipeView));
         }
 
-        findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
+       /* v.findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mSwipeView.doSwipe(false);
-            }
-        });
+           public void onClick(View v) {
+               mSwipeView.doSwipe(false);
+          }
+       });
 
-        findViewById(R.id.acceptBtn).setOnClickListener(new View.OnClickListener() {
+        v.findViewById(R.id.acceptBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSwipeView.doSwipe(true);
             }
-        });
+        });*/
+        return v;
     }
 }

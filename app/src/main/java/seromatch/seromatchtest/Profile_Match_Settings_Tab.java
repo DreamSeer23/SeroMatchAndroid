@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,12 +56,13 @@ public class Profile_Match_Settings_Tab extends Fragment
         tabLayout.addTab(tabLayout.newTab().setText("Match"));
         tabLayout.addTab(tabLayout.newTab().setText("Settings"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        final ViewPager viewPager = (ViewPager) v.findViewById(R.id.pager);
+        final CustomViewPager viewPager = (CustomViewPager) v.findViewById(R.id.pager);
         //Need to load all of the tabs correctly it is number of tabs+1
         viewPager.setOffscreenPageLimit(4);
         final TabAdapter adapter = new TabAdapter
                 (getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
+        viewPager.setPagingEnabled(false);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

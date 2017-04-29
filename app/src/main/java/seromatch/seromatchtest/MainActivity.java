@@ -4,7 +4,6 @@ package seromatch.seromatchtest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,9 +18,10 @@ public class MainActivity extends AppCompatActivity {
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_action_name));
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_account));
         tabLayoutBottom.setTabGravity(TabLayout.GRAVITY_FILL);;
-        final ViewPager viewPagerBottom = (ViewPager) findViewById(R.id.bottom_pager);
+        final CustomViewPager viewPagerBottom = (CustomViewPager) findViewById(R.id.bottom_pager);
         //Need to load all of the tabs correctly it is number of tabs+1
         viewPagerBottom.setOffscreenPageLimit(5);
+        viewPagerBottom.setPagingEnabled(false);
         final BottomTabAdapter adapterBottom = new BottomTabAdapter
                 (getSupportFragmentManager(), tabLayoutBottom.getTabCount());
         viewPagerBottom.setAdapter(adapterBottom);
