@@ -6,35 +6,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
-public class SwipeView extends Fragment
-{
-    private SwipePlaceHolderView mSwipeView;
-    private Context mContext;
+import static seromatch.seromatchtest.MainActivity.maxAge;
+import static seromatch.seromatchtest.MainActivity.minAge;
 
+public class SwipeView extends Fragment implements View.OnClickListener
+{
+
+    Context mContext;
+    View view;
+    static SwipePlaceHolderView sv;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.swipetab, container, false);
-
-        mSwipeView = (SwipePlaceHolderView)v.findViewById(R.id.swipeView);
+        view=v;
         mContext = v.getContext();
-
-        mSwipeView.getBuilder()
-                .setDisplayViewCount(3)
-                .setSwipeDecor(new SwipeDecor()
-                        .setPaddingTop(20)
-                        .setRelativeScale(0.01f)
-                        .setSwipeInMsgLayoutId(R.layout.swipe_in_msg)
-                        .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg));
-
-        for(Profile profile : Utils.loadProfiles(v.getContext())){
-            mSwipeView.addView(new MatchCard(mContext, profile, mSwipeView));
-        }
-
+        Button b= (Button) v.findViewById(R.id.out);
+        b.setOnClickListener(this);
        /* v.findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
             @Override
            public void onClick(View v) {
@@ -49,5 +42,31 @@ public class SwipeView extends Fragment
             }
         });*/
         return v;
+    }
+    public void setMatches(Context c,View vi)
+    {
+        sv = (SwipePlaceHolderView) vi.findViewById(R.id.swipeView);
+        sv.getBuilder()
+                .setDisplayViewCount(3)
+                .setSwipeDecor(new SwipeDecor()
+                        .setPaddingTop(20)
+                        .setRelativeScale(0.01f)
+                        .setSwipeInMsgLayoutId(R.layout.swipe_in_msg)
+                        .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg));
+        //Log.d("Restart","test");
+        for(Profile profile : Utils.loadProfiles(mContext))
+        {
+
+            if(profile.getAge()>=minAge&&profile.getAge()<=maxAge)
+            {
+                // Log.d("Restart",profile.getAge().toString());
+                sv.addView(new MatchCard(mContext, profile, sv));
+            }
+        }
+    }
+    @Override
+    public void onClick(View v)
+    {
+        setMatches(mContext,view);
     }
 }

@@ -17,6 +17,7 @@ public class Match_Tab extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.match_tab, container, false);
+
         return v;
     }
 }

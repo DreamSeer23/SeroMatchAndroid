@@ -2,221 +2,254 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
-    <!--Main XML for Settings here @ToDO-->
-    <!--LinearLayout
+    <!--https://android-arsenal.com/details/1/3415
+    Got the number pickers from there-->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"-->
-        <RelativeLayout
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical">
+        <TextView
+            android:text="@string/radius"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbars="vertical">
-            <!--:nestedScrollingEnabled="true"
-            android:scrollIndicators="right"-->
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="12dp"
+            android:id="@+id/radiusText"
 
+            />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Radiusdropdown"
+            android:layout_marginTop="12dp"
+            android:spinnerMode="dropdown"
+            android:entries="@array/distance_in_miles"
+            android:layout_alignLeft="@+id/radiusText"
+            android:layout_alignStart="@+id/radiusText"
+            android:prompt="@string/miles"
+            android:layout_below="@+id/radiusText"
 
+            />
+        <TextView
+            android:text="@string/day_from_testing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Radiusdropdown"
+            android:layout_alignLeft="@+id/radiusText"
+            android:layout_alignStart="@+id/radiusText"
+            android:layout_marginTop="24dp"
+            android:id="@+id/testingRangeText"
+            />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/testingRangeText"
+            android:spinnerMode="dropdown"
+            android:entries="@array/testing_range"
+            android:layout_alignLeft="@+id/testingRangeText"
+            android:layout_alignStart="@+id/testingRangeText"
+            android:layout_marginTop="20dp"
+            android:id="@+id/testingRange"
+            />
 
+        <me.angrybyte.numberpicker.view.ActualNumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/testingRange"
+            android:layout_alignStart="@+id/testingRange"
+            android:layout_below="@+id/ageText"
+            android:id="@+id/agePickerMin"
+            app:show_bars="false"
+            app:show_fast_controls="true"
+            app:min_value="18"
+            app:value="18"
+            app:controls_color="@color/white"
+            app:fast_controls_color="@color/white"
+            app:text_color="@color/white"
+            android:layout_marginTop="12dp" />
 
+        <me.angrybyte.numberpicker.view.ActualNumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ageText"
+            android:layout_toRightOf="@+id/agePickerMin"
+            android:layout_toEndOf="@+id/agePickerMin"
+            app:show_bars="false"
+            app:max_value="100"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            app:show_fast_controls="true"
+            app:controls_color="@color/white"
+            app:fast_controls_color="@color/white"
+            android:id="@+id/agePickerMax"
+            app:text_color="@color/white"
+            app:value="100"
+            android:layout_marginTop="12dp" />
+        <TextView
+            android:text="@string/seen_on_seromatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/agePickerMin"
+            android:layout_alignLeft="@+id/agePickerMin"
+            android:layout_alignStart="@+id/agePickerMin"
+            android:layout_marginTop="25dp"
 
+            android:id="@+id/textView4" />
+        <TextView
+            android:text="@string/new_match"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView6"
+            android:layout_alignLeft="@+id/textView6"
+            android:layout_alignStart="@+id/textView6"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
 
-            <TextView
-                android:text="@string/radius"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="18dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="12dp"
-                android:id="@+id/textView" />
+            android:id="@+id/textView7"
+            />
+        <TextView
+            android:text="@string/messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView7"
+            android:layout_alignLeft="@+id/textView7"
+            android:layout_alignStart="@+id/textView7"
+            android:layout_marginTop="15dp"
 
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView"
-                android:layout_alignLeft="@+id/textView"
-                android:layout_alignStart="@+id/textView"
-                android:layout_marginTop="17dp"
-                android:id="@+id/RadiusseekBar" />
+            android:id="@+id/textView9"
+            />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch3"
+            android:layout_alignBaseline="@+id/textView10"
+            android:layout_alignBottom="@+id/textView10"
+            android:layout_alignLeft="@+id/switch2"
+            android:layout_alignStart="@+id/switch2" />
+        <TextView
+            android:text="@string/in_app_vibrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11"
+            android:layout_below="@+id/textView10"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="18dp"
 
-            <TextView
-                android:text="@string/day_from_testing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/RadiusseekBar"
-                android:layout_alignLeft="@+id/RadiusseekBar"
-                android:layout_alignStart="@+id/RadiusseekBar"
-                android:layout_marginTop="24dp"
-                android:id="@+id/textView2" />
+            android:layout_marginStart="18dp"
+            />
+        <TextView
+            android:text="@string/in_app_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView11"
+            android:layout_marginTop="21dp"
+            android:id="@+id/textView12"
 
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="21dp"
-                android:id="@+id/seekBar3"
-                android:layout_below="@+id/textView2"
-                android:layout_alignLeft="@+id/textView2"
-                android:layout_alignStart="@+id/textView2" />
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"/>
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch1"
+            android:layout_alignBottom="@+id/textView7"
+            android:layout_toRightOf="@+id/testingRangeText"
+            android:layout_toEndOf="@+id/testingRangeText" />
 
-            <TextView
-                android:text="@string/age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/seekBar3"
-                android:layout_alignLeft="@+id/seekBar3"
-                android:layout_alignStart="@+id/seekBar3"
-                android:layout_marginTop="22dp"
-                android:id="@+id/textView3" />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch2"
+            android:layout_alignBottom="@+id/textView9"
+            android:layout_alignLeft="@+id/switch1"
+            android:layout_alignStart="@+id/switch1" />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/seen"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/agePickerMin"
+            android:layout_alignLeft="@+id/switch1"
+            android:layout_alignStart="@+id/switch1" />
 
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView3"
-                android:layout_alignLeft="@+id/textView3"
-                android:layout_alignStart="@+id/textView3"
-                android:layout_marginTop="20dp"
-                android:id="@+id/seekBar4" />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch5"
+            android:layout_alignBaseline="@+id/textView11"
+            android:layout_alignBottom="@+id/textView11"
+            android:layout_alignLeft="@+id/switch4"
+            android:layout_alignStart="@+id/switch4" />
+        <TextView
+            android:text="@string/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-            <TextView
-                android:text="@string/seen_on_seromatch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/seekBar4"
-                android:layout_alignLeft="@+id/seekBar3"
-                android:layout_alignStart="@+id/seekBar3"
-                android:layout_marginTop="25dp"
-                android:id="@+id/textView4" />
+            android:id="@+id/textView5"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/textView4"
+            android:layout_alignLeft="@+id/testingRange"
+            android:layout_alignStart="@+id/testingRange" />
+        <TextView
+            android:text="@string/notification"
+            android:layout_width="wrap_content"
 
-            <TextView
-                android:text="@string/new_match"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView6"
-                android:layout_alignLeft="@+id/textView6"
-                android:layout_alignStart="@+id/textView6"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="9dp"
-                android:id="@+id/textView7" />
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:layout_marginTop="22dp"
+            android:layout_below="@+id/textView5"
+            android:layout_alignLeft="@+id/textView5"
+            android:layout_alignStart="@+id/textView5" />
+        <TextView
+            android:text="@string/message_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10"
 
-            <TextView
-                android:text="@string/messages"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView7"
-                android:layout_alignLeft="@+id/textView7"
-                android:layout_alignStart="@+id/textView7"
-                android:layout_marginTop="15dp"
-                android:id="@+id/textView9" />
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/textView9"
+            android:layout_alignLeft="@+id/textView9"
+            android:layout_alignStart="@+id/textView9" />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch4"
+            android:layout_alignBaseline="@+id/textView12"
+            android:layout_alignBottom="@+id/textView12"
+            android:layout_alignLeft="@+id/switch3"
+            android:layout_alignStart="@+id/switch3" />
 
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch3"
-                android:layout_alignBaseline="@+id/textView10"
-                android:layout_alignBottom="@+id/textView10"
-                android:layout_alignLeft="@+id/switch2"
-                android:layout_alignStart="@+id/switch2" />
+        <TextView
+            android:text="@string/maximum_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="23dp"
+            android:id="@+id/maxAgeText"
+            android:layout_below="@+id/testingRange"
+            android:layout_alignRight="@+id/agePickerMax"
+            android:layout_alignEnd="@+id/agePickerMax" />
 
-            <TextView
-                android:text="@string/in_app_vibrate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView11"
-                android:layout_below="@+id/textView10"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="18dp"
-                android:layout_marginStart="18dp"/>
+        <TextView
+            android:text="@string/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ageText"
+            android:layout_alignBaseline="@+id/maxAgeText"
+            android:layout_alignBottom="@+id/maxAgeText"
+            android:layout_alignRight="@+id/Radiusdropdown"
+            android:layout_alignEnd="@+id/Radiusdropdown" />
 
-            <TextView
-                android:text="@string/in_app_sound"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView11"
-                android:layout_marginTop="21dp"
-                android:id="@+id/textView12"
-                android:layout_marginLeft="18dp"
-                android:layout_marginStart="18dp"/>
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch1"
-                android:layout_alignBottom="@+id/textView7"
-                android:layout_toRightOf="@+id/textView2"
-                android:layout_toEndOf="@+id/textView2" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch2"
-                android:layout_alignBottom="@+id/textView9"
-                android:layout_alignLeft="@+id/switch1"
-                android:layout_alignStart="@+id/switch1" />
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/seen"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_below="@+id/seekBar4"
-                android:layout_alignLeft="@+id/switch1"
-                android:layout_alignStart="@+id/switch1" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch5"
-                android:layout_alignBaseline="@+id/textView11"
-                android:layout_alignBottom="@+id/textView11"
-                android:layout_alignLeft="@+id/switch4"
-                android:layout_alignStart="@+id/switch4" />
-
-            <TextView
-                android:text="@string/username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView5"
-                android:layout_marginTop="20dp"
-                android:layout_below="@+id/textView4"
-                android:layout_alignLeft="@+id/seekBar4"
-                android:layout_alignStart="@+id/seekBar4" />
-
-            <TextView
-                android:text="@string/notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView6"
-                android:layout_marginTop="22dp"
-                android:layout_below="@+id/textView5"
-                android:layout_alignLeft="@+id/textView5"
-                android:layout_alignStart="@+id/textView5" />
-
-            <TextView
-                android:text="@string/message_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView10"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/textView9"
-                android:layout_alignLeft="@+id/textView9"
-                android:layout_alignStart="@+id/textView9" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch4"
-                android:layout_alignBaseline="@+id/textView12"
-                android:layout_alignBottom="@+id/textView12"
-                android:layout_alignLeft="@+id/switch3"
-                android:layout_alignStart="@+id/switch3" />
-
-            <!--FAQ HELP-->
-
-
+        <!--FAQ HELP-->
         </RelativeLayout>
-    <!--/LinearLayout-->
 </ScrollView>

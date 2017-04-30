@@ -7,8 +7,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    static int minAge=18;
+    static int maxAge=100;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Bottom Tabs
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 (getSupportFragmentManager(), tabLayoutBottom.getTabCount());
         viewPagerBottom.setAdapter(adapterBottom);
         viewPagerBottom.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayoutBottom));
+        //Gets the right tab that you left on
         Intent intent = getIntent();
         if(intent.hasExtra("Tab Number"))
         {
