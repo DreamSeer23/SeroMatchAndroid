@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,6 @@ public class Community_Tab extends Fragment
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus)
                 {
-                    Log.d("Startup",String.valueOf(activityStartup)+"0");
                     if (activityStartup)
                     {
                         sV.clearFocus();
@@ -68,7 +66,6 @@ public class Community_Tab extends Fragment
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                System.out.println(tab.getText()+" "+tab.getPosition());
             }
 
             @Override
