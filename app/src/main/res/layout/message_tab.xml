@@ -3,9 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--Main XML for Messages here @ToDO-->
-    <fragment
-        android:id="@+id/details_fragment"
-        class="seromatch.seromatchtest.Messages"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="50dp"
+        android:text="@string/messages"
+        android:id="@+id/message_title"
+        android:textSize="36sp"
+        android:textColor="@color/white"/>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout_messages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager_messages"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tab_layout_messages"/>
 </RelativeLayout>

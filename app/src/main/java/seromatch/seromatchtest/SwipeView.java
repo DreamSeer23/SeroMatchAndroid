@@ -26,6 +26,7 @@ public class SwipeView extends Fragment implements View.OnClickListener
         View v = inflater.inflate(R.layout.swipetab, container, false);
         view=v;
         mContext = v.getContext();
+        //setMatches(mContext,v);
         Button b= (Button) v.findViewById(R.id.out);
         b.setOnClickListener(this);
        /* v.findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
@@ -46,6 +47,7 @@ public class SwipeView extends Fragment implements View.OnClickListener
     public void setMatches(Context c,View vi)
     {
         sv = (SwipePlaceHolderView) vi.findViewById(R.id.swipeView);
+        sv.bringToFront();
         sv.getBuilder()
                 .setDisplayViewCount(3)
                 .setSwipeDecor(new SwipeDecor()
@@ -53,6 +55,8 @@ public class SwipeView extends Fragment implements View.OnClickListener
                         .setRelativeScale(0.01f)
                         .setSwipeInMsgLayoutId(R.layout.swipe_in_msg)
                         .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg));
+
+        vi.bringToFront();
         //Log.d("Restart","test");
         for(Profile profile : Utils.loadProfiles(mContext))
         {

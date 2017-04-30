@@ -1,7 +1,7 @@
 package seromatch.seromatchtest;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +17,10 @@ import java.util.List;
 public class Messages extends Fragment
 {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View v = inflater.inflate(R.layout.messages, container, false);
+
         String [] send;
         List<Message> messages =Utils.loadMessages(v.getContext());
         send=new String[messages.size()];
@@ -26,12 +28,13 @@ public class Messages extends Fragment
         ListView lv2 = (ListView) v.findViewById(R.id.messagelist);
         for(Message m:messages)
         {
-            send[i]="From: "+m.getSender();
+            send[i]=m.getSender();
             i++;
         }
-        final ArrayAdapter<String> adapter = new MySimpleArrayAdapter<>(v.getContext(), android.R.layout.simple_list_item_1, messages,send);
+        final ArrayAdapter<String> adapter = new MySimpleArrayAdapter<>(v.getContext(), R.layout.message, messages,send);
         lv2.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
         return v;
     }
 }

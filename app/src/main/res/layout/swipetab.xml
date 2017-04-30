@@ -24,6 +24,11 @@
             android:layout_marginLeft="30dp"
             android:background="@drawable/ic_heart"/-->
     </LinearLayout>
+
+    <com.mindorks.placeholderview.SwipePlaceHolderView
+        android:id="@+id/swipeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,10 +37,5 @@
         android:layout_marginTop="160dp"
         android:textColor="@color/black"
         android:textSize="30sp"
-        android:onClick="refresh"
-        android:id="@+id/out"/>
-    <com.mindorks.placeholderview.SwipePlaceHolderView
-        android:id="@+id/swipeView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:id="@+id/out" />
 </FrameLayout>
