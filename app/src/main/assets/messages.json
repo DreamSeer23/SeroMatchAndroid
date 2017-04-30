@@ -9,6 +9,6 @@
     "sender":"Jason",
     "recipient":"John",
     "subject":"Today",
-    "body":"Hello, John \t I was just wondering how your day was going \t From, \t Jason"
+    "body":"Hello, John \nI was just wondering how your day was going \nFrom, \nJason"
   }
 ]

@@ -6,7 +6,6 @@ package seromatch.seromatchtest;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -39,12 +38,10 @@ public class MySimpleArrayAdapter<S> extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
         TextView myText = (TextView) view;
-        String reciver=messsageList.get(position).getRecipient();
         String sub=messsageList.get(position).getSubject();
         String body=messsageList.get(position).getBody();
-        myText.setGravity(Gravity.CENTER);
         myText.setTextColor(Color.BLACK);
-        myText.append("\t To: "+reciver+"\t Subject: "+sub+"\t Body: "+body);
+        myText.append("\nSubject: "+sub+"\nBody: \n"+body);
         return view;
     }
 

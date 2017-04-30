@@ -2,7 +2,6 @@ package seromatch.seromatchtest;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ public class Messages extends Fragment
         for(Message m:messages)
         {
             send[i]="From: "+m.getSender();
-            Log.d("Send", m.getSender());
             i++;
         }
         final ArrayAdapter<String> adapter = new MySimpleArrayAdapter<>(v.getContext(), android.R.layout.simple_list_item_1, messages,send);
