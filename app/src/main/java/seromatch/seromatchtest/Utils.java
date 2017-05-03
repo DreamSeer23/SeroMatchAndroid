@@ -60,6 +60,50 @@ public class Utils {
             return null;
         }
     }
+    public static List<Message> loadDrafts(Context context)
+    {
+        try{
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            //Where data is pulled
+            JSONArray array = new JSONArray(loadJSONFromAsset(context, "drafts.json"));
+            List<Message> messageList= new ArrayList<>();
+            for(int i=0;i<array.length();i++)
+            {
+                Message message = gson.fromJson(array.getString(i), Message.class);
+                messageList.add(message);
+            }
+            return messageList;
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public static List<Message> loadSent(Context context)
+    {
+        try{
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            //Where data is pulled
+            JSONArray array = new JSONArray(loadJSONFromAsset(context, "sent.json"));
+            List<Message> messageList= new ArrayList<>();
+            for(int i=0;i<array.length();i++)
+            {
+                Message message = gson.fromJson(array.getString(i), Message.class);
+                messageList.add(message);
+            }
+            return messageList;
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
     private static String loadJSONFromAsset(Context context, String jsonFileName) {
         String json = null;
         InputStream is=null;

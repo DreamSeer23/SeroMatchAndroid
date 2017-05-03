@@ -13,11 +13,14 @@ import android.view.ViewGroup;
 public class Match_Tab extends Fragment
 {
     //Main Code for Match here @ToDO
+    private boolean data;
+    private boolean activityAssignedValue;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.match_tab, container, false);
 
+        View v = inflater.inflate(R.layout.match_tab, container, false);
         return v;
     }
 }

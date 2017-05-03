@@ -1,0 +1,14 @@
+[
+  {
+    "sender":" John",
+    "recipient":" Joe",
+    "subject":" Re: Hey",
+    "body":" My Day is going"
+  },
+  {
+    "sender":" John",
+    "recipient":" Jason",
+    "subject":" Re: Today",
+    "body":" Hey Jason\n I am doing well \n From"
+  }
+]

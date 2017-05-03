@@ -1,14 +1,14 @@
 [
   {
-    "sender":"Joe",
-    "recipient":"John",
-    "subject":"Hey",
-    "body":"How is your day going?"
+    "sender":" Joe",
+    "recipient":" John",
+    "subject":" Hey",
+    "body":" How is your day going?"
   },
   {
-    "sender":"Jason",
-    "recipient":"John",
-    "subject":"Today",
-    "body":"Hello, John \nI was just wondering how your day was going \nFrom, \nJason"
+    "sender":" Jason",
+    "recipient":" John",
+    "subject":" Today",
+    "body":" Hello, John \n I was just wondering how your day was going \n From, \n Jason"
   }
 ]

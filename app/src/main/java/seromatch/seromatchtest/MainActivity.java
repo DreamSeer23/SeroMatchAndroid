@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
-    static int minAge=18;
-    static int maxAge=100;
+public class MainActivity extends AppCompatActivity implements Settings_Tab.InterfaceDataCommunicator {
+    public FragmentCommunicator fragmentCommunicator;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Bottom Tabs
@@ -21,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_profile_match));
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_action_name));
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_account));
-        tabLayoutBottom.setTabGravity(TabLayout.GRAVITY_FILL);;
+        tabLayoutBottom.setTabGravity(TabLayout.GRAVITY_FILL);
+        ;
         final CustomViewPager viewPagerBottom = (CustomViewPager) findViewById(R.id.bottom_pager);
         //Need to load all of the tabs correctly it is number of tabs+1
         viewPagerBottom.setOffscreenPageLimit(5);
@@ -32,18 +31,14 @@ public class MainActivity extends AppCompatActivity {
         viewPagerBottom.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayoutBottom));
         //Gets the right tab that you left on
         Intent intent = getIntent();
-        if(intent.hasExtra("Tab Number"))
-        {
+        if (intent.hasExtra("Tab Number")) {
             viewPagerBottom.setCurrentItem(intent.getIntExtra("Tab Number", 0));
-        }
-        else
-        {
+        } else {
             viewPagerBottom.setCurrentItem(0);
         }
         tabLayoutBottom.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tabBottom)
-            {
+            public void onTabSelected(TabLayout.Tab tabBottom) {
                 viewPagerBottom.setCurrentItem(tabBottom.getPosition());
 
             }
@@ -58,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void updateData(Bundle data) {
+        if (fragmentCommunicator != null)
+        {
+
+            fragmentCommunicator.passDataToFragment(data);
+        }
     }
     @Override
     public void onResume()

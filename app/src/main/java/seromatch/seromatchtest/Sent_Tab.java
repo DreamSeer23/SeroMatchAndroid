@@ -22,18 +22,29 @@ public class Sent_Tab extends Fragment
     {
         View v = inflater.inflate(R.layout.inbox_tab, container, false);
 
-        String [] send;
+        String [] sent;
         //Change to loadSent
-        List<Message> messages =Utils.loadMessages(v.getContext());
-        send=new String[messages.size()];
-        int i=0;
+        List<Message> messages =Utils.loadSent(v.getContext());
         ListView lv2 = (ListView) v.findViewById(R.id.messagelist);
-        for(Message m:messages)
+        if(messages.size()==0)
         {
-            send[i]=m.getRecipient();
-            i++;
+            sent=new String[2];
+            sent[0]="";
+            sent[1]="No Sent Mail";
+            lv2.setDividerHeight(0);
         }
-        final ArrayAdapter<String> adapter = new MySimpleArrayAdapter<>(v.getContext(), R.layout.message, messages,send);
+        else
+        {
+            sent = new String[messages.size()];
+            int i = 0;
+            for (Message m : messages)
+            {
+                sent[i] = m.getRecipient();
+                i++;
+            }
+            lv2.setDividerHeight(1);
+        }
+        final ArrayAdapter<String> adapter = new MySimpleArrayAdapter<>(v.getContext(), R.layout.message, messages,sent);
         lv2.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         //Add On click here

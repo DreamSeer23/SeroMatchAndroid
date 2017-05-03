@@ -16,7 +16,7 @@ public class Profile_Match_Settings_Tab extends Fragment
 {
     private boolean activityStartup = false;
     android.widget.SearchView sV;
-
+    private TabLayout tabLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -49,7 +49,7 @@ public class Profile_Match_Settings_Tab extends Fragment
         });
         //Search
         //Top Tabs
-        TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
+        tabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("My Profile"));
         tabLayout.addTab(tabLayout.newTab().setText("Match"));
         tabLayout.addTab(tabLayout.newTab().setText("Settings"));
@@ -78,6 +78,7 @@ public class Profile_Match_Settings_Tab extends Fragment
 
             }
         });
+        //Communications
         return v;
     }
     @Override
@@ -86,4 +87,7 @@ public class Profile_Match_Settings_Tab extends Fragment
         super.onResume();
         activityStartup=false;
     }
+
+
+
 }

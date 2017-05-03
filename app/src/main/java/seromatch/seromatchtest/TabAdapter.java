@@ -1,7 +1,11 @@
 package seromatch.seromatchtest;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import java.util.Map;
+
 /**
  * Created by jason_000 on 4/6/2017.
  */
@@ -10,7 +14,7 @@ public class TabAdapter extends FragmentStatePagerAdapter
 {
 
         private int NumOfTabs;
-
+        private Map<Integer,Fragment> mPageReferenceMap;
         public TabAdapter(FragmentManager fm, int NumTabs)
         {
             super(fm);
@@ -25,7 +29,7 @@ public class TabAdapter extends FragmentStatePagerAdapter
                      Profile_Tab ptab = new Profile_Tab ();
                      return ptab;
                 case 1:
-                    Match_Tab mtab = new Match_Tab();
+                    SwipeView mtab = new SwipeView();
                     return mtab;
                 case 2:
                     Settings_Tab tab3 = new Settings_Tab();

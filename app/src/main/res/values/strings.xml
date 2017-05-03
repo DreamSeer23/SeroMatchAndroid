@@ -33,7 +33,7 @@
     <string name="tap_anywhere_to_begin">Tap Anywhere To Begin</string>
     <string name="match_pics">Match Pics</string>
     <string name="message_title">Messages</string>
-    <string name="out_of_matches">Press to get more matches</string>
+    <string name="out_of_matches">Swipe down to get more matches</string>
     <string name="miles">Miles</string>
     <string name="min_start_age">18</string>
     <string name="max_age">100</string>

@@ -21,17 +21,28 @@ public class Inbox_Tab extends Fragment
     {
         View v = inflater.inflate(R.layout.inbox_tab, container, false);
 
-        String [] send;
+        String [] inbox;
         List<Message> messages =Utils.loadMessages(v.getContext());
-        send=new String[messages.size()];
-        int i=0;
         ListView lv2 = (ListView) v.findViewById(R.id.messagelist);
-        for(Message m:messages)
+        if(messages.size()==0)
         {
-            send[i]=m.getSender();
-            i++;
+            inbox=new String[2];
+            inbox[0]="";
+            inbox[1]="Inbox is Empty";
+            lv2.setDividerHeight(0);
         }
-        final ArrayAdapter<String> adapter = new MySimpleArrayAdapter<>(v.getContext(), R.layout.message, messages,send);
+        else
+        {
+            inbox = new String[messages.size()];
+            int i = 0;
+            for (Message m : messages)
+            {
+                inbox[i] = m.getRecipient();
+                i++;
+            }
+            lv2.setDividerHeight(1);
+        }
+        final ArrayAdapter<String> adapter = new MySimpleArrayAdapter<>(v.getContext(), R.layout.message, messages,inbox);
         lv2.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         //Add On click here

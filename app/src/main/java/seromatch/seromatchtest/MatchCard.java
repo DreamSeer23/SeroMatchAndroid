@@ -1,7 +1,6 @@
 package seromatch.seromatchtest;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,27 +46,27 @@ public class MatchCard {
 
     @SwipeOut
     private void onSwipedOut(){
-        Log.d("EVENT", "onSwipedOut");
-        mSwipeView.addView(this);
+        //Log.d("EVENT", "onSwipedOut");
+       // mSwipeView.addView(this); This re addes them to the queue
     }
 
     @SwipeCancelState
     private void onSwipeCancelState(){
-        Log.d("EVENT", "onSwipeCancelState");
+        //Log.d("EVENT", "onSwipeCancelState");
     }
 
     @SwipeIn
     private void onSwipeIn(){
-        Log.d("EVENT", "onSwipedIn");
+       //Log.d("EVENT", "onSwipedIn");
     }
 
     @SwipeInState
     private void onSwipeInState(){
-        Log.d("EVENT", "onSwipeInState");
+       //Log.d("EVENT", "onSwipeInState");
     }
 
     @SwipeOutState
     private void onSwipeOutState(){
-        Log.d("EVENT", "onSwipeOutState");
+       // Log.d("EVENT", "onSwipeOutState");
     }
 }

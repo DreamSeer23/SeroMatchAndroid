@@ -1,53 +1,100 @@
 package seromatch.seromatchtest;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GestureDetectorCompat;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
-import static seromatch.seromatchtest.MainActivity.maxAge;
-import static seromatch.seromatchtest.MainActivity.minAge;
-
-public class SwipeView extends Fragment implements View.OnClickListener
+public class SwipeView extends Fragment implements FragmentCommunicator
 {
 
     Context mContext;
     View view;
-    static SwipePlaceHolderView sv;
+    SwipePlaceHolderView sv;
+    protected int numOfMatches;
+    private int minAge;
+    private int maxAge;
+   // Button b;
+    private GestureDetectorCompat mDetector;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.swipetab, container, false);
         view=v;
         mContext = v.getContext();
-        //setMatches(mContext,v);
-        Button b= (Button) v.findViewById(R.id.out);
-        b.setOnClickListener(this);
-       /* v.findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-           public void onClick(View v) {
-               mSwipeView.doSwipe(false);
-          }
-       });
-
-        v.findViewById(R.id.acceptBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSwipeView.doSwipe(true);
-            }
-        });*/
+        mDetector = new GestureDetectorCompat(mContext,new MyGestureListener());
+        numOfMatches=0;
+        minAge=28;
+        maxAge=100;
+        setupSV();
+        v.setOnTouchListener(mOnListTouchListener);
+        setMatches(false);
         return v;
     }
-    public void setMatches(Context c,View vi)
+
+    public void setMatches(boolean restart)
     {
-        sv = (SwipePlaceHolderView) vi.findViewById(R.id.swipeView);
-        sv.bringToFront();
+        if (restart)
+        {
+            removeMatches();
+        }
+        else
+        {
+            for (Profile profile : Utils.loadProfiles(mContext)) {
+
+                if (profile.getAge() >= minAge && profile.getAge() <= maxAge) {
+                    numOfMatches++;
+                   // Log.d("Test", "Number: C" + numOfMatches);
+                    sv.addView(new MatchCard(mContext, profile, sv));
+                }
+            }
+        }
+    }
+
+    private void removeMatches()
+    {
+        if(numOfMatches>0)
+        {
+            //Will change to add flag
+            Log.d("Test", "Number: T" + numOfMatches);
+            sv.doSwipe(false);
+            //Change this to make it faster; Might not be able to do this
+            new CountDownTimer((int) (2.25 * 200), 200) {
+                public void onTick(long millisUntilFinished) {
+                }
+
+                public void onFinish()
+                {
+                    numOfMatches--;
+                   // Log.d("Test", "Number: F" + numOfMatches);
+                    removeMatches();
+                }
+            }.start();
+        }
+        else
+        {
+            setupSV();
+           // Log.d("Test","0: "+numOfMatches);
+            setMatches(false);
+        }
+
+    }
+
+    private void setupSV()
+    {
+        sv = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
         sv.getBuilder()
                 .setDisplayViewCount(3)
                 .setSwipeDecor(new SwipeDecor()
@@ -55,22 +102,72 @@ public class SwipeView extends Fragment implements View.OnClickListener
                         .setRelativeScale(0.01f)
                         .setSwipeInMsgLayoutId(R.layout.swipe_in_msg)
                         .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg));
-
-        vi.bringToFront();
-        //Log.d("Restart","test");
-        for(Profile profile : Utils.loadProfiles(mContext))
-        {
-
-            if(profile.getAge()>=minAge&&profile.getAge()<=maxAge)
-            {
-                // Log.d("Restart",profile.getAge().toString());
-                sv.addView(new MatchCard(mContext, profile, sv));
+        ImageButton r=(ImageButton) view.findViewById(R.id.rejectBtn);
+        ImageButton a=(ImageButton) view.findViewById(R.id.acceptBtn);
+        r.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sv.doSwipe(false);
+                numOfMatches--;
+               // Log.d("Test", "Number: R" + numOfMatches);
             }
-        }
+        });
+        r.bringToFront();
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sv.doSwipe(true);
+                numOfMatches--;
+               // Log.d("Test", "Number: A" + numOfMatches);
+            }
+        });
+        a.bringToFront();
+    }
+
+    //Communicating
+    @Override
+    public void passDataToFragment(Bundle someValue)
+    {
+        minAge=someValue.getInt("Min");
+        maxAge=someValue.getInt("Max");
+        Log.d("Test", ""+minAge+" "+maxAge+" "+someValue.getBoolean("restart"));
+        setMatches(someValue.getBoolean("restart"));
     }
     @Override
-    public void onClick(View v)
+    public void onAttach(Context context){
+        super.onAttach(context);
+        ((MainActivity)context).fragmentCommunicator = this;
+    }
+    //Touch Events
+    View.OnTouchListener mOnListTouchListener = new  View.OnTouchListener()
     {
-        setMatches(mContext,view);
+        @Override
+        public boolean onTouch(View view, MotionEvent event)
+        {
+            return mDetector.onTouchEvent(event);
+        }
+    };
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener
+    {
+        private static final String DEBUG_TAG = "Gestures";
+
+        @Override
+        public boolean onDown(MotionEvent event)
+        {
+            Log.d(DEBUG_TAG,"onDown: ");
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY)
+        {
+            if (event2.getY()-event1.getY() > 30)
+            {
+                Log.d("Test", "onFling:");
+                setMatches(false);
+                return true;
+            }
+            else return super.onFling(event1, event2, velocityX, velocityY);
+        }
     }
 }

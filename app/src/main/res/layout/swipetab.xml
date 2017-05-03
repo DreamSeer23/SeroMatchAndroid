@@ -5,37 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="bottom"
-        android:background="@color/grey"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <!--ImageButton
-            android:id="@+id/rejectBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ic_cancel"/>
         <ImageButton
-            android:id="@+id/acceptBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_heart"/-->
-    </LinearLayout>
+            android:id="@+id/rejectBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="427dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"
+            android:background="@drawable/ic_cancel"
+            android:clickable="true" />
 
     <com.mindorks.placeholderview.SwipePlaceHolderView
         android:id="@+id/swipeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/out_of_matches"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="160dp"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:id="@+id/out" />
+
+    <ImageButton
+        android:id="@+id/acceptBtn"
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="260dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="427dp"
+        android:background="@drawable/ic_heart"
+        android:clickable="true" />
 </FrameLayout>

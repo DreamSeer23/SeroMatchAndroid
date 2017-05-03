@@ -1,5 +1,6 @@
 package seromatch.seromatchtest;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,12 +10,11 @@ import android.view.ViewGroup;
 import me.angrybyte.numberpicker.listener.OnValueChangeListener;
 import me.angrybyte.numberpicker.view.ActualNumberPicker;
 
-import static seromatch.seromatchtest.MainActivity.maxAge;
-import static seromatch.seromatchtest.MainActivity.minAge;
 
 public class Settings_Tab extends Fragment implements OnValueChangeListener
 {
     ActualNumberPicker mPicker;
+    private InterfaceDataCommunicator interfaceDataCommunicator;
     ActualNumberPicker mPicker2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -26,21 +26,45 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener
         mPicker2= (ActualNumberPicker) v.findViewById(R.id.agePickerMax);
         mPicker2.setListener(this);
         mPicker2.setMinValue(51);
+
         return v;
+    }
+    public interface InterfaceDataCommunicator
+    {
+        void updateData(Bundle data);
     }
     @Override
     public void onValueChanged(int oldValue, int newValue)
     {
-        minAge=mPicker.getValue();
-        maxAge=mPicker2.getValue();
-        if((!(maxAge<=mPicker.getMinValue()))&&mPicker2.getValue()!=mPicker.getMaxValue())
+        int minAge = mPicker.getValue();
+        int maxAge = mPicker2.getValue();
+        if((!(maxAge <=mPicker.getMinValue()))&&mPicker2.getValue()!=mPicker.getMaxValue())
             mPicker.setMaxValue(maxAge);
-        else if((!(minAge>=mPicker2.getMaxValue()))&&mPicker.getValue()!=mPicker2.getMinValue())
+        else if((!(minAge >=mPicker2.getMaxValue()))&&mPicker.getValue()!=mPicker2.getMinValue())
             mPicker2.setMinValue(minAge);
         //Rebuilds the matches
-       // SwipeView.setMatches();
+        Bundle b=new Bundle(3);
+        b.putBoolean("restart",true);
+        b.putInt("Min", minAge);
+        b.putInt("Max", maxAge);
+        interfaceDataCommunicator.updateData(b);
     }
-
+    @Override
+    public void onAttach(Context context)
+    {
+        super.onAttach(context);
+        if (context instanceof InterfaceDataCommunicator) {
+            interfaceDataCommunicator = (InterfaceDataCommunicator) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement MyListFragment.OnItemSelectedListener");
+        }
+    }
+    @Override
+    public void onDetach() {
+        interfaceDataCommunicator = null; // => avoid leaking, thanks @Deepscorn
+        super.onDetach();
+    }
 }
 
 
