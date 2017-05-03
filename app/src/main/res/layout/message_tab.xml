@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--Main XML for Messages here @ToDO-->
-    <TextView
+    <SearchView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="@string/messages"
-        android:id="@+id/message_title"
-        android:textSize="36sp"
-        android:textColor="@color/white"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/search_bar_community"
+        android:orientation="horizontal"
+        android:queryHint="@string/messages"
+        android:iconifiedByDefault="false"/>
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout_messages"
         android:layout_width="match_parent"

@@ -1,15 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <!--Main XML for Accounts here @ToDO-->
+
+    <ImageView
+        android:layout_width="164dp"
+        android:layout_height="72dp"
+        app:srcCompat="@drawable/ic_cancel"
+        android:id="@+id/profilepic"
+        android:cropToPadding="false"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="12dp" />
+
     <TextView
-        android:id="@+id/account_tab"
-        android:layout_width="wrap_content"
+        android:text="Name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/my_account"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:id="@+id/account_name"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="12dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="12dp"
+        android:background="?android:attr/dividerHorizontal"
+        android:id="@+id/buttonDiv" />
+    <Button
+        android:text="Invoices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        style="?android:attr/buttonBarButtonStyle"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="3dp"
+        android:background="?android:attr/dividerHorizontal"
+        android:id="@+id/buttonDiv2" />
+
+    <Button
+        android:text="Refer a Friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        style="?android:attr/buttonBarButtonStyle" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="3dp"
+        android:background="?android:attr/dividerHorizontal"
+        android:id="@+id/buttonDiv3" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="Request STD Testing" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="3dp"
+        android:background="?android:attr/dividerHorizontal"
+        android:id="@+id/buttonDiv4" />
+
+    <Button
+        android:text="Change your Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button4"
+        style="?android:attr/buttonBarButtonStyle" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="3dp"
+        android:background="?android:attr/dividerHorizontal"
+        android:id="@+id/buttonDiv8" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="83dip"
+        android:background="?android:attr/dividerHorizontal"
+        android:id="@+id/buttonDiv5" />
+
+    <Button
+        android:text="Support"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button5"
+        style="?android:attr/buttonBarButtonStyle" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="3dp"
+        android:background="?android:attr/dividerHorizontal"
+        android:id="@+id/buttonDiv6" />
+
+    <Button
+        android:text="About"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button6"
+        style="?android:attr/buttonBarButtonStyle" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:layout_marginTop="3dp"
+        android:background="?android:attr/dividerHorizontal"
+        android:id="@+id/buttonDiv7" />
+
+    <Button
+        android:text="Logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button7"
+        style="?android:attr/buttonBarButtonStyle" />
 
 
-</RelativeLayout>
+</LinearLayout>

@@ -22,7 +22,7 @@ public class Message_Tab_Adapter extends FragmentStatePagerAdapter
 
         switch (position) {
             case 0:
-                Messages messagetab = new Messages ();
+                Inbox_Tab messagetab = new Inbox_Tab ();
                 return messagetab;
             case 1:
                 Draft_Tab dtab = new Draft_Tab();

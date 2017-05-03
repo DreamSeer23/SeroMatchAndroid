@@ -43,8 +43,11 @@ public class MySimpleArrayAdapter<S> extends ArrayAdapter<String> {
         View view = super.getView(position, convertView, parent);
         TextView myText = (TextView) view;
         SpannableString message= new SpannableString(myText.getText().toString()+"\n"+messsageList.get(position).getSubject()+"\n\n"+messsageList.get(position).getBody());
+        //End number of the Sender Name
         int send=myText.getText().toString().length()+1;
+        //End number of Subject
         int sub=send+messsageList.get(position).getSubject().length();
+        //This sets the UI of the message Txt
         message.setSpan(new AbsoluteSizeSpan(100),0,myText.getText().toString().length(),0);
         message.setSpan(new StyleSpan(Typeface.BOLD),0,myText.getText().toString().length(),0);
         message.setSpan(new AbsoluteSizeSpan(70),send,sub,0);

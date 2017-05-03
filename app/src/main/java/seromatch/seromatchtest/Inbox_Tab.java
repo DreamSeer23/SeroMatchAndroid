@@ -14,12 +14,12 @@ import java.util.List;
  * Created by jason_000 on 4/20/2017.
  */
 
-public class Messages extends Fragment
+public class Inbox_Tab extends Fragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.messages, container, false);
+        View v = inflater.inflate(R.layout.inbox_tab, container, false);
 
         String [] send;
         List<Message> messages =Utils.loadMessages(v.getContext());
@@ -34,7 +34,7 @@ public class Messages extends Fragment
         final ArrayAdapter<String> adapter = new MySimpleArrayAdapter<>(v.getContext(), R.layout.message, messages,send);
         lv2.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
+        //Add On click here
         return v;
     }
 }

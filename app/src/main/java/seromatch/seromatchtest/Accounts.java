@@ -17,6 +17,8 @@ public class Accounts extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v=inflater.inflate(R.layout.account_tab, container, false);
+        //@ToDo set the pic to the users profile pic
+        //@ToDo add code for the buttons to open fragments/Dialogs
         return v;
     }
 }

@@ -4,6 +4,7 @@ package seromatch.seromatchtest;
  * Created by jason_000 on 4/6/2017.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,11 +15,39 @@ import android.view.ViewGroup;
 
 public class Messages_Tab extends Fragment
 {
-    //Main Messages Code here @ToDo
+    private boolean activityStartup;
+    android.widget.SearchView sV;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v=inflater.inflate(R.layout.message_tab, container, false);
+        //Search
+        sV= (android.widget.SearchView) v.findViewById(R.id.search_bar_community);
+        activityStartup = false;
+        sV.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                {
+                    if (activityStartup)
+                    {
+                        sV.clearFocus();
+                        activityStartup = false;
+                        // TODO: 4/10/2017 Send a bundle with 1 so it knows what tab it came from. Since right now it goes auto back to 1
+                        Intent change = new Intent(getContext(), Search.class);
+                        change.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        change.putExtra("Tab Number",3);
+                        startActivity(change);
+                    }
+                    else
+                    {
+                        sV.clearFocus();
+                        activityStartup = true;
+                    }
+                }
+
+            }
+        });
         //Top Tabs
         TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tab_layout_messages);
         tabLayout.addTab(tabLayout.newTab().setText("Inbox"));
@@ -50,5 +79,11 @@ public class Messages_Tab extends Fragment
         });
         return v;
 
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        activityStartup=false;
     }
 }
