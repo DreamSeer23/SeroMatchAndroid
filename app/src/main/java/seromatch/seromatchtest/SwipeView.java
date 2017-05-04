@@ -27,6 +27,8 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     private int maxAge;
    // Button b;
     private GestureDetectorCompat mDetector;
+    private int range;
+    private boolean reset;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -36,8 +38,10 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         mContext = v.getContext();
         mDetector = new GestureDetectorCompat(mContext,new MyGestureListener());
         numOfMatches=0;
-        minAge=28;
+        //These would be gotten from the database
+        minAge=18;
         maxAge=100;
+        range=3;
         setupSV();
         v.setOnTouchListener(mOnListTouchListener);
         setMatches(false);
@@ -49,14 +53,16 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         if (restart)
         {
             removeMatches();
+            Log.d("Test", "Removing: C2");
         }
         else
         {
-            for (Profile profile : Utils.loadProfiles(mContext)) {
-
-                if (profile.getAge() >= minAge && profile.getAge() <= maxAge) {
+            for (Profile profile : Utils.loadProfiles(mContext))
+            {
+                Log.d("Test", "Number: C2 " + numOfMatches+" "+profile.getMonths());
+                if ((profile.getAge() >= minAge && profile.getAge() <= maxAge)&&profile.getMonths()<=range) {
                     numOfMatches++;
-                   // Log.d("Test", "Number: C" + numOfMatches);
+                    Log.d("Test", "Number: C " + numOfMatches+" "+profile.getMonths());
                     sv.addView(new MatchCard(mContext, profile, sv));
                 }
             }
@@ -128,10 +134,18 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     @Override
     public void passDataToFragment(Bundle someValue)
     {
-        minAge=someValue.getInt("Min");
-        maxAge=someValue.getInt("Max");
-        Log.d("Test", ""+minAge+" "+maxAge+" "+someValue.getBoolean("restart"));
-        setMatches(someValue.getBoolean("restart"));
+
+
+        reset=someValue.getBoolean("Reset",false);
+        Log.d("Test", "The settings: "+minAge+" "+maxAge+" "+range);
+        if(minAge!=someValue.getInt("Min",18)||maxAge!=someValue.getInt("Max",100)||range!=someValue.getInt("Months",3))
+        {
+            minAge=someValue.getInt("Min",18);
+            maxAge=someValue.getInt("Max",100);
+            range=someValue.getInt("Months",3);
+            Log.d("Test", "The settings: "+minAge+" "+maxAge+" "+range);
+            setMatches(reset);
+        }
     }
     @Override
     public void onAttach(Context context){

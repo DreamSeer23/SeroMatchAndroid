@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements Settings_Tab.InterfaceDataCommunicator {
     public FragmentCommunicator fragmentCommunicator;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements Settings_Tab.Inte
     public void updateData(Bundle data) {
         if (fragmentCommunicator != null)
         {
-
+            Log.d("Test",data.getInt("Months")+"");
             fragmentCommunicator.passDataToFragment(data);
         }
     }

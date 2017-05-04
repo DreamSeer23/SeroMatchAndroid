@@ -69,7 +69,7 @@
             app:show_bars="false"
             app:show_fast_controls="true"
             app:min_value="18"
-            app:value="28"
+            app:value="18"
             app:controls_color="@color/white"
             app:fast_controls_color="@color/white"
             app:text_color="@color/white"

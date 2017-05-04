@@ -16,6 +16,10 @@ public class Profile {
     @Expose
     private Integer age;
 
+    @SerializedName("Months")
+    @Expose
+    private int months;
+
     @SerializedName("location")
     @Expose
     private String location;
@@ -50,5 +54,13 @@ public class Profile {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public int getMonths() {
+        return months;
+    }
+
+    public void setMonths(int location) {
+        this.months = months;
     }
 }
