@@ -2,7 +2,6 @@ package seromatch.seromatchtest;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -10,10 +9,8 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +22,7 @@ public class Utils {
     private static double mylat;
     private static double mylng;
     private double dis;
-    GoogleMapper model;
+    List<Double> latLng;
 
     public static List<Profile> loadProfiles(Context context)
     {
@@ -106,7 +103,6 @@ public class Utils {
                 messageList.add(message);
             }
             return messageList;
-
         }
         catch (Exception e)
         {
@@ -114,39 +110,8 @@ public class Utils {
             return null;
         }
     }
-    public List<Double>  distance(String address)
-    {
-        //getting map address
+    //Only called at the start to cache the lat and lng; Normally would be stored in the database
 
-        try{
-            address=address.replaceAll(" ","%20");
-            url = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + address);
-            Log.d("Test","Made it to distance util "+url);
-            List<Double> temp = new ArrayList<Double>();
-            AsyncTask maps= new MapsAsync();
-            maps.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            double lat2;
-            double lng2;
-            maps.get();
-            List<Results> test=model.getResults();
-            if(test.size()!=0) {
-                lat2 = test.get(0).getGeometry().getLocation().getLat();
-                lng2 = test.get(0).getGeometry().getLocation().getLng();
-            }
-            else
-            {
-                lat2=0;
-                lng2=0;
-            }
-            temp.add(lat2);
-            temp.add(lng2);
-            Log.d("Test","Lat2 and Lng2: "+lat2+" "+lng2);
-            return temp;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
     private static String loadJSONFromAsset(Context context, String jsonFileName)
     {
         String json = null;
@@ -166,27 +131,82 @@ public class Utils {
         }
         return json;
     }
-    public void setup(Profile p)
+   /* public void setup(Profile p,Context con)
     {
-        //ToDO Run ASYNC and save the lat and lng to the json file here.
-        //ToDo run progress dialog?
-        //ToDo Then in the regular load just getLat and getLng
-        //ToDo Then do the distace based on the new lat lng
+        List<Double> temp = distance(p.getLocation());
+        Log.d("Setup", "Got the array: " + temp.size());
+        try
+        {
+            JSONArray arr = new JSONArray(loadJSONFromAsset(con, "profiles.json"));
+            for (int i = 0; i < arr.length(); i++)
+            {
+
+                JSONObject jsonObj = (JSONObject) arr.get(i); // get the josn object
+                if (jsonObj.getString("name").equals(p.getName())) // compare for the key-value
+                {
+                    Log.d("Setup","Made it here");
+                    Log.d("Setup","Before "+((JSONObject) arr.get(i)).get("lat")+" "+temp.get(0));
+                    ((JSONObject) arr.get(i)).put("lat", temp.get(0)); // put the new value for the key
+                    Log.d("Setup","After "+((JSONObject) arr.get(i)).get("lat")+" "+temp.get(0));
+                    ((JSONObject) arr.get(i)).put("lng", temp.get(1)); // put the new value for the key
+                    Log.d("Setup","Final "+p.getLat()+" "+p.getLng());
+                }
+
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    private class MapsAsync extends AsyncTask<Object, String, GoogleMapper>
+    public List<Double> distance(String address)
     {
+        //getting map address
 
+        try{
+            address=address.replaceAll(" ","%20");
+            url = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + address);
+            Log.d("Test","Made it to distance util "+url);
+            AsyncTask maps= new MapsAsync();
+            maps.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            maps.get();
+            return latLng;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    public class MapsAsync extends AsyncTask<Object, String, List<Double>>
+    {
         @Override
-        protected GoogleMapper doInBackground(Object... arg0) {
+        protected List<Double> doInBackground(Object... arg0)
+        {
+            List<Double> temp = new ArrayList<Double>();
             try
             {
+                double lat2;
+                double lng2;
                 Log.d("Test","Got the url in Async: "+url);
                 BufferedReader address2 = new BufferedReader(new InputStreamReader(url.openStream()));
                 Gson gson = new GsonBuilder().serializeNulls().create();
-                model=gson.fromJson(address2,GoogleMapper.class);
+                GoogleMapper model=gson.fromJson(address2,GoogleMapper.class);
+                List<Results> test=model.getResults();
+                if(test.size()!=0) {
+                    lat2 = test.get(0).getGeometry().getLocation().getLat();
+                    lng2 = test.get(0).getGeometry().getLocation().getLng();
+                }
+                else
+                {
+                    lat2=0;
+                    lng2=0;
+                }
+                Log.d("Test","Lat2 and Lng2: "+lat2+" "+lng2);
+                temp.add(lat2);
+                temp.add(lng2);
                 address2.close();
+                latLng=temp;
             }
             catch (Exception e)
             {
@@ -197,13 +217,13 @@ public class Utils {
                 isCancelled();
 
             }
-            return model;
+            return temp;
         }
         @Override
-        protected void onCancelled(GoogleMapper   result) {
+        protected void onCancelled(List<Double>   result) {
         }
         @Override
-        protected void onPostExecute(GoogleMapper   result) {
+        protected void onPostExecute(List<Double>   result) {
 
         }
         @Override
@@ -218,15 +238,11 @@ public class Utils {
 
 
         }
-    }
-
-
-    public double distanceTotal(List<Double> latlng1, double lat2, double lon2, double el1, double el2)
+    }*/
+    public double distanceTotal(double lat1,double lon1, double lat2, double lon2, double el1, double el2)
     {
 
             final int R = 6371; // Radius of the earth
-            double lat1 = latlng1.get(0);
-            double lon1 = latlng1.get(1);
             Double latDistance = Math.toRadians(lat2 - lat1);
             Double lonDistance = Math.toRadians(lon2 - lon1);
             Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)

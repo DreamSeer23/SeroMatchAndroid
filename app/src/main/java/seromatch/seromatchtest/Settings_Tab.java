@@ -46,7 +46,7 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
     }
     public interface InterfaceDataCommunicator
     {
-        void updateData(Bundle data);
+        void updateData(Bundle data,boolean flag);
     }
     @Override
     public void onValueChanged(int oldValue, int newValue)
@@ -58,8 +58,7 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
         else if((!(minAge >=mPicker2.getMaxValue()))&&mPicker.getValue()!=mPicker2.getMinValue())
             mPicker2.setMinValue(minAge);
         //Rebuilds the matches
-        minAge=minA;
-        maxAge=maxA;
+        Log.d("Numbers","Updating Values");
         rebuild();
     }
 
@@ -69,25 +68,28 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
         b.putInt("Min", minAge);
         b.putInt("Max", maxAge);
         b.putInt("Months",rangeMonth);
-        Log.d("Test","+1 "+rangeMonth);
         b.putBoolean("Reset",true);
-        b.putInt("MaxDis", maxDis);
-        interfaceDataCommunicator.updateData(b);
+        b.putInt("Miles", maxDis);
+        Bundle a = new Bundle(1);
+        a.putBundle("Settings",b);
+        interfaceDataCommunicator.updateData(a,false);
 
     }
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id)
     {
         if(parent.getItemAtPosition(pos).toString().contains("Months"))
         {
-            Log.d("Test",pos+""+Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]));
+            Log.d("Test",pos+" "+Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]));
             rangeMonth = Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]);
+            rebuild();
         }
          else if(parent.getItemAtPosition(pos).toString().contains("Miles"))
         {
-            Log.d("Test",pos+""+Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]));
+            Log.d("Test",pos+" "+Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]));
             maxDis = Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]);
+            Log.d("Test",""+maxDis);
+            rebuild();
         }
-        rebuild();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {

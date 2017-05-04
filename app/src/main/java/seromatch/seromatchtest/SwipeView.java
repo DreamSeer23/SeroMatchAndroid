@@ -25,7 +25,7 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     View view;
     private boolean starting;
     SwipePlaceHolderView sv;
-    protected int numOfMatches;
+    public static int numOfMatches;
     private int minAge;
     private int maxAge;
     private int maxDis;
@@ -36,7 +36,6 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     private double myLat;
     private double myLng;
     private boolean changedLoc;
-    private double oldLat;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -54,9 +53,7 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         maxDis=20;
         setupSV();
         myLat=0;
-        oldLat=0;
         v.setOnTouchListener(mOnListTouchListener);
-        //setMatches(false);
         return v;
     }
 
@@ -66,13 +63,12 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         {
             Log.d("Numbers", "Reseting " + numOfMatches);
             removeMatches();
-            Log.d("Test", "Removing: C2");
         }
         else
         {
             Utils u=new Utils();
             List<Profile> test=u.loadProfiles(mContext);
-            Log.d("Test","Lat/Lng "+myLat+"/"+myLng);
+
             for (Profile profile : Utils.loadProfiles(mContext))
             {
 
@@ -80,27 +76,25 @@ public class SwipeView extends Fragment implements FragmentCommunicator
                 {
                     if(myLat!=0)
                     {
-                        oldLat=myLat;
-                        //Only do this once
-                        List<Double> temp= u.distance(test.get(i).getLocation());
-                        Log.d("Test","Got the array: "+temp.size());
-                        //Resume here
                         double dis;
+                        Log.d("Test","Lat/Lng "+myLat+"/"+myLng+" Their Lat/Lng:"+profile.getLng()+"/"+profile.getLat());
                         dis= u.distanceTotal(profile.getLat(),profile.getLng(), myLat, myLng, 0, 0);
-                        if (dis <= maxDis) {
+                        if (dis <= maxDis)
+                        {
                             Log.d("Test", "Pass: Dis: " + dis + " Max Dis: " + maxDis);
                             Log.d("Numbers", "Number: C1 " + numOfMatches);
                             numOfMatches++;
-                            sv.addView(new MatchCard(mContext, test.get(i), sv));
-                        } else
+                            sv.addView(new MatchCard(mContext, profile, sv));
+                        }
+                        else
                             Log.d("Test", "Fail: Dis: " + dis + " Max Dis: " + maxDis);
                     }
                     else
                     {
                         Log.d("Test", "Fail:");
                         numOfMatches++;
-                         Log.d("Numbers", "Number: C " + numOfMatches);
-                        sv.addView(new MatchCard(mContext, test.get(i), sv));
+                        Log.d("Numbers", "Number: C " + numOfMatches);
+                        sv.addView(new MatchCard(mContext, profile, sv));
                     }
                 }
             }
@@ -109,7 +103,7 @@ public class SwipeView extends Fragment implements FragmentCommunicator
 
     private void removeMatches()
     {
-        if(numOfMatches>0)
+        if(numOfMatches>=0)
         {
             //Will change to add flag so it wont remove the person from possible matches
             Log.d("Numbers", "Number: T" + numOfMatches);
@@ -131,22 +125,22 @@ public class SwipeView extends Fragment implements FragmentCommunicator
             setupSV();
             Log.d("Numbers","0: "+numOfMatches);
             setMatches(false);
-
         }
-
     }
 
     private void setupSV()
     {
-        if(starting)
+         /* if(starting)
         {
-            starting=false;
+          starting=false;
             for (Profile profile : Utils.loadProfiles(mContext))
             {
                 Utils u=new Utils();
-                u.setup(profile);
+                if(profile.getLat()==0&&profile.getLng()==0)
+                u.setup(profile,mContext);
+                Log.d("Setup","New "+profile.getLat()+" "+profile.getLng());
             }
-        }
+        }*/
         sv = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
         sv.getBuilder()
                 .setDisplayViewCount(3)
@@ -160,19 +154,13 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         r.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sv.doSwipe(false);
-                numOfMatches--;
-               // Log.d("Test", "Number: R" + numOfMatches);
-            }
+                sv.doSwipe(false);}
         });
         r.bringToFront();
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sv.doSwipe(true);
-                numOfMatches--;
-               // Log.d("Test", "Number: A" + numOfMatches);
-            }
+                sv.doSwipe(true);}
         });
         a.bringToFront();
     }
@@ -183,28 +171,29 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     {
         if(someValue.containsKey("Settings"))
         {
-          reset=someValue.getBoolean("Reset",false);
-          Log.d("Test", "The settings: "+minAge+" "+maxAge+" "+range);
-          if(minAge!=someValue.getInt("Min",18)||maxAge!=someValue.getInt("Max",100)||range!=someValue.getInt("Months",3))
-          {
-            minAge=someValue.getInt("Min",18);
-            maxAge=someValue.getInt("Max",100);
-            range=someValue.getInt("Months",3);
-            Log.d("Test", "The settings: "+minAge+" "+maxAge+" "+range);
+            reset = someValue.getBundle("Settings").getBoolean("Reset", false);
+            Log.d("Numbers", "The Old settings: " + minAge + " " + maxAge + " " + range + " " + maxDis + " ");
+            if (minAge != someValue.getBundle("Settings").getInt("Min", 18) || maxAge != someValue.getBundle("Settings").getInt("Max", 100)
+                    || range != someValue.getBundle("Settings").getInt("Months", 3) || maxDis != someValue.getBundle("Settings").getInt("Miles", 20))
+            {
+                minAge = someValue.getBundle("Settings").getInt("Min", 18);
+                maxAge = someValue.getBundle("Settings").getInt("Max", 100);
+                range = someValue.getBundle("Settings").getInt("Months", 3);
+                maxDis = someValue.getBundle("Settings").getInt("Miles", 20);
+                Log.d("Numbers", "The New settings: " + minAge + " " + maxAge + " " + range + " " + maxDis + " " + reset + " " + myLat);
+            }
             setMatches(reset);
-          }
         }
-        if(someValue.containsKey("Lat")&&myLat!=someValue.getDouble("Lat"))
+        else
         {
-            myLat = someValue.getDouble("Lat");
-            myLng = someValue.getDouble("Lng");
-            Log.d("Numbers", ""+minAge+" "+maxAge+" "+someValue.getBoolean("restart")+" D:"+maxDis+" Lat: "+myLat+" Lng: "+myLng);
-            setMatches(true);
+            Log.d("Numbers","Just sending the data");
+            myLat=someValue.getDouble("Lat");
+            myLng=someValue.getDouble("Lng");
         }
-        
     }
     @Override
-    public void onAttach(Context context){
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
         ((MainActivity)context).fragmentCommunicator = this;
     }
@@ -217,6 +206,7 @@ public class SwipeView extends Fragment implements FragmentCommunicator
             return mDetector.onTouchEvent(event);
         }
     };
+
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener
     {
         private static final String DEBUG_TAG = "Gestures";
@@ -233,7 +223,7 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         {
             if (event2.getY()-event1.getY() > 30)
             {
-                Log.d("Test", "onFling:");
+                Log.d("Numbers", "onFling:");
                 setMatches(false);
                 return true;
             }

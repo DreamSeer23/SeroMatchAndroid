@@ -5,8 +5,8 @@
     "age":20,
     "location":"Dallas, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.7766642",
+    "lng":"-96.79698789999999"
   },
   {
     "url":"http://cdn.cavemancircus.com//wp-content/uploads/images/2015/june/pretty_girls_3/pretty_girls_15.jpg",
@@ -14,8 +14,8 @@
     "age":22,
     "location":"Dallas, TX",
     "Months":"6",
-    "lat":"",
-    "lng":""
+    "lat":"32.7766642",
+    "lng":"-96.79698789999999"
 
   },
   {
@@ -24,8 +24,8 @@
     "age":23,
     "location":" Fort Worth, TX",
     "Months":"12",
-    "lat":"",
-    "lng":""
+    "lat":"32.7554883",
+    "lng":"-97.33076579999999"
 
   },
   {
@@ -34,8 +34,8 @@
     "age":19,
     "location":"Allen,TX",
     "Months":"12",
-    "lat":"",
-    "lng":""
+    "lat":"33.1031744",
+    "lng":"-96.67055030000002"
   },
   {
     "url":"http://www.qqxxzx.com/images/pretty-girls-pictures/pretty-girls-pictures-17.jpg",
@@ -43,8 +43,8 @@
     "age":20,
     "location":"Richardson, TX",
     "Months":"6",
-    "lat":"",
-    "lng":""
+    "lat":"32.9483335",
+    "lng":"-96.7298519"
   },
   {
     "url":"http://www.qqxxzx.com/images/pretty-girls-pictures/pretty-girls-pictures-18.jpg",
@@ -52,8 +52,8 @@
     "age":28,
     "location":"Plano, TX",
     "Months":"6",
-    "lat":"",
-    "lng":""
+    "lat":"33.0198431",
+    "lng":"-96.6988856"
   },
   {
     "url":"http://oddpad.com/wp-content/uploads/2015/05/pretty_girls_51.jpg",
@@ -61,8 +61,8 @@
     "age":21,
     "location":"Fort Worth, TX",
     "Months":"6",
-    "lat":"",
-    "lng":""
+    "lat":"32.7554883",
+    "lng":"-97.33076579999999"
   },
   {
     "url":"http://oddpad.com/wp-content/uploads/2014/12/pretty_girls_13.jpg",
@@ -70,8 +70,8 @@
     "age":23,
     "location":"Fort Worth, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.7554883",
+    "lng":"-97.33076579999999"
   },
   {
     "url":"http://www.spyderonlines.com/images/wallpapers/pretty-girls-pictures/pretty-girls-pictures-16.jpg",
@@ -79,8 +79,8 @@
     "age":28,
     "location":"Dallas, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.7766642",
+    "lng":"-96.79698789999999"
   },
   {
     "url":"http://cdn.cavemancircus.com//wp-content/uploads/images/2015/june/pretty_girls_3/pretty_girls_20.jpg",
@@ -88,8 +88,8 @@
     "age":22,
     "location":"Dallas, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.7766642",
+    "lng":"-96.79698789999999"
   },
   {
     "url":"http://cdn.cavemancircus.com//wp-content/uploads/images/2015/march/pretty_girls_2/pretty_girls_12.jpg",
@@ -97,8 +97,8 @@
     "age":28,
     "location":"Fort Worth, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.7554883",
+    "lng":"-97.33076579999999"
   },
   {
     "url":"https://s-media-cache-ak0.pinimg.com/736x/de/87/7b/de877bcccc2295a58fe8758fee0ebc7d.jpg",
@@ -106,8 +106,8 @@
     "age":28,
     "location":"Dallas, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.7766642",
+    "lng":"-96.79698789999999"
   },
   {
     "url":"https://scontent.cdninstagram.com/hphotos-xpf1/t51.2885-15/e15/10986280_404995676329336_1177563605_n.jpg",
@@ -115,17 +115,17 @@
     "age":19,
     "location":"Red Oak, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.5332101",
+    "lng":"-96.81529999999999"
   },
   {
     "url":"http://i.imgur.com/wqsvWT4.jpg",
     "name":"Korial",
     "age":21,
-    "location":"DESOTO, TX",
+    "location":"Desoto, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.5896998",
+    "lng":"-96.85707379999999"
   },
   {
     "url":"http://data.whicdn.com/images/60103426/large.jpg",
@@ -133,16 +133,16 @@
     "age":29,
     "location":"Fort Worth, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.7554883",
+    "lng":"-97.33076579999999"
   },
   {
     "url":"http://oddpad.com/wp-content/uploads/2015/03/pretty_girls_31.jpg",
     "name":"SDF",
     "age":28,
-    "location":"EULESS, TX ",
+    "location":"Euless, TX",
     "Months":"3",
-    "lat":"",
-    "lng":""
+    "lat":"32.8370727",
+    "lng":"-97.08195409999999"
   }
 ]

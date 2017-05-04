@@ -72,19 +72,19 @@ public class Profile {
         this.months = months;
     }
 
-    public double getlat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setlat(double lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public double getlng() {
+    public double getLng() {
         return lng;
     }
 
-    public void setlng(double lng) {
+    public void setLng(double lng) {
         this.lng = lng;
     }
 
