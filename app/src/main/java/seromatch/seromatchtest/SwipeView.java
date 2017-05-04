@@ -21,6 +21,7 @@ public class SwipeView extends Fragment implements FragmentCommunicator
 
     Context mContext;
     View view;
+    private boolean starting;
     SwipePlaceHolderView sv;
     protected int numOfMatches;
     private int minAge;
@@ -42,6 +43,7 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         minAge=18;
         maxAge=100;
         range=3;
+        starting=true;
         setupSV();
         v.setOnTouchListener(mOnListTouchListener);
         setMatches(false);
@@ -100,6 +102,15 @@ public class SwipeView extends Fragment implements FragmentCommunicator
 
     private void setupSV()
     {
+        if(starting)
+        {
+            starting=false;
+            for (Profile profile : Utils.loadProfiles(mContext))
+            {
+                Utils u=new Utils();
+                u.setup(profile);
+            }
+        }
         sv = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
         sv.getBuilder()
                 .setDisplayViewCount(3)

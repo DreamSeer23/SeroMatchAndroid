@@ -4,42 +4,54 @@
     "name":"Sofia",
     "age":20,
     "location":"Dallas, TX",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://cdn.cavemancircus.com//wp-content/uploads/images/2015/june/pretty_girls_3/pretty_girls_15.jpg",
     "name":"Roma",
     "age":22,
     "location":"California",
-    "Months":"6"
+    "Months":"6",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://i.imgur.com/N6SaAlZ.jpg",
     "name":"Zoya",
     "age":23,
     "location":"Atlantic",
-    "Months":"12"
+    "Months":"12",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://cdn.cavemancircus.com//wp-content/uploads/images/2015/january/pretty_girls_2/pretty_girls_5.jpg",
     "name":"Carol",
     "age":19,
     "location":"New",
-    "Months":"12"
+    "Months":"12",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://www.qqxxzx.com/images/pretty-girls-pictures/pretty-girls-pictures-17.jpg",
     "name":"Saansa",
     "age":20,
     "location":"Manhattan",
-    "Months":"6"
+    "Months":"6",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://www.qqxxzx.com/images/pretty-girls-pictures/pretty-girls-pictures-18.jpg",
     "name":"Khaleesi",
     "age":28,
     "location":"Future Westros",
-    "Months":"6"
+    "Months":"6",
+    "lat":"",
+    "lng":""
 
   },
   {
@@ -47,69 +59,89 @@
     "name":"Heena",
     "age":21,
     "location":"India",
-    "Months":"6"
+    "Months":"6",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://oddpad.com/wp-content/uploads/2014/12/pretty_girls_13.jpg",
     "name":"Jasmin",
     "age":23,
     "location":"Taxes",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://www.spyderonlines.com/images/wallpapers/pretty-girls-pictures/pretty-girls-pictures-16.jpg",
     "name":"Monica",
     "age":28,
     "location":"Dallas, TX",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://cdn.cavemancircus.com//wp-content/uploads/images/2015/june/pretty_girls_3/pretty_girls_20.jpg",
     "name":"Phoebe",
     "age":22,
     "location":"Dallas, TX",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://cdn.cavemancircus.com//wp-content/uploads/images/2015/march/pretty_girls_2/pretty_girls_12.jpg",
     "name":"Rachel",
     "age":28,
     "location":"Central Perk",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"https://s-media-cache-ak0.pinimg.com/736x/de/87/7b/de877bcccc2295a58fe8758fee0ebc7d.jpg",
     "name":"Jainis",
     "age":28,
     "location":"Dallas, TX",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"https://scontent.cdninstagram.com/hphotos-xpf1/t51.2885-15/e15/10986280_404995676329336_1177563605_n.jpg",
     "name":"Samia",
     "age":19,
     "location":"India",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://i.imgur.com/wqsvWT4.jpg",
     "name":"Korial",
     "age":21,
     "location":"Japan",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://data.whicdn.com/images/60103426/large.jpg",
     "name":"Chin Si",
     "age":29,
     "location":"China",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   },
   {
     "url":"http://oddpad.com/wp-content/uploads/2015/03/pretty_girls_31.jpg",
     "name":"SDF",
     "age":28,
     "location":"America",
-    "Months":"3"
+    "Months":"3",
+    "lat":"",
+    "lng":""
   }
 ]

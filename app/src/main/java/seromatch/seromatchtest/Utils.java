@@ -122,4 +122,11 @@ public class Utils {
         }
         return json;
     }
+    public void setup(Profile p)
+    {
+        //ToDO Run ASYNC and save the lat and lng to the json file here.
+        //ToDo run progress dialog?
+        //ToDo Then in the regular load just getLat and getLng
+        //ToDo Then do the distace based on the new lat lng
+    }
 }
