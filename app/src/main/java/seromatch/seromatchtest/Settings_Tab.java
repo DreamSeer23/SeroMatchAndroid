@@ -3,6 +3,7 @@ package seromatch.seromatchtest;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,11 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
     ActualNumberPicker mPicker;
     private InterfaceDataCommunicator interfaceDataCommunicator;
     ActualNumberPicker mPicker2;
+
+    private int minAge;
+    private int maxAge;
+    private int rangeMonth;
     private int maxDis;
-    int minAge;
-    int maxAge;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -31,6 +34,9 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
         mPicker2= (ActualNumberPicker) v.findViewById(R.id.agePickerMax);
         mPicker2.setListener(this);
         mPicker2.setMinValue(51);
+        Spinner range=(Spinner) v.findViewById(R.id.testingRange);
+        range.setOnItemSelectedListener(this);
+        rangeMonth=3;
         Spinner distance=(Spinner) v.findViewById(R.id.Radiusdropdown);
         distance.setOnItemSelectedListener(this);
         minAge=18;
@@ -52,22 +58,36 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
         else if((!(minAge >=mPicker2.getMaxValue()))&&mPicker.getValue()!=mPicker2.getMinValue())
             mPicker2.setMinValue(minAge);
         //Rebuilds the matches
-        Bundle b=new Bundle(4);
-        b.putBoolean("restart",true);
+        minAge=minA;
+        maxAge=maxA;
+        rebuild();
+    }
+
+    private void rebuild()
+    {
+        Bundle b=new Bundle(5);
         b.putInt("Min", minAge);
         b.putInt("Max", maxAge);
+        b.putInt("Months",rangeMonth);
+        Log.d("Test","+1 "+rangeMonth);
+        b.putBoolean("Reset",true);
         b.putInt("MaxDis", maxDis);
         interfaceDataCommunicator.updateData(b);
+
     }
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id)
     {
-        maxDis=Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]);
-        Bundle b=new Bundle(4);
-        b.putBoolean("restart",true);
-        b.putInt("Min", minAge);
-        b.putInt("Max", maxAge);
-        b.putInt("MaxDis", maxDis);
-        interfaceDataCommunicator.updateData(b);
+        if(parent.getItemAtPosition(pos).toString().contains("Months"))
+        {
+            Log.d("Test",pos+""+Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]));
+            rangeMonth = Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]);
+        }
+         else if(parent.getItemAtPosition(pos).toString().contains("Miles"))
+        {
+            Log.d("Test",pos+""+Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]));
+            maxDis = Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]);
+        }
+        rebuild();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {

@@ -23,6 +23,7 @@ public class SwipeView extends Fragment implements FragmentCommunicator
 
     Context mContext;
     View view;
+    private boolean starting;
     SwipePlaceHolderView sv;
     protected int numOfMatches;
     private int minAge;
@@ -30,11 +31,13 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     private int maxDis;
    // Button b;
     private GestureDetectorCompat mDetector;
+    private int range;
+    private boolean reset;
     private double myLat;
     private double myLng;
     private boolean changedLoc;
     private double oldLat;
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -43,8 +46,11 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         mContext = v.getContext();
         mDetector = new GestureDetectorCompat(mContext,new MyGestureListener());
         numOfMatches=0;
+        //These would be gotten from the database
         minAge=18;
         maxAge=100;
+        range=3;
+        starting=true;
         maxDis=20;
         setupSV();
         myLat=0;
@@ -60,31 +66,27 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         {
             Log.d("Numbers", "Reseting " + numOfMatches);
             removeMatches();
+            Log.d("Test", "Removing: C2");
         }
         else
         {
             Utils u=new Utils();
             List<Profile> test=u.loadProfiles(mContext);
             Log.d("Test","Lat/Lng "+myLat+"/"+myLng);
-            for (int i=0;i<test.size();i++)
+            for (Profile profile : Utils.loadProfiles(mContext))
             {
 
-                if (test.get(i).getAge() >= minAge && test.get(i).getAge() <= maxAge)
+                if ((profile.getAge() >= minAge && profile.getAge() <= maxAge)&&profile.getMonths()<=range)
                 {
                     if(myLat!=0)
                     {
                         oldLat=myLat;
+                        //Only do this once
                         List<Double> temp= u.distance(test.get(i).getLocation());
                         Log.d("Test","Got the array: "+temp.size());
+                        //Resume here
                         double dis;
-                        if(!(temp.get(0)==0))
-                        {
-                             dis= u.distanceTotal(temp, myLat, myLng, 0, 0);
-                        }
-                        else
-                        {
-                            dis = 100;
-                        }
+                        dis= u.distanceTotal(profile.getLat(),profile.getLng(), myLat, myLng, 0, 0);
                         if (dis <= maxDis) {
                             Log.d("Test", "Pass: Dis: " + dis + " Max Dis: " + maxDis);
                             Log.d("Numbers", "Number: C1 " + numOfMatches);
@@ -136,6 +138,15 @@ public class SwipeView extends Fragment implements FragmentCommunicator
 
     private void setupSV()
     {
+        if(starting)
+        {
+            starting=false;
+            for (Profile profile : Utils.loadProfiles(mContext))
+            {
+                Utils u=new Utils();
+                u.setup(profile);
+            }
+        }
         sv = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
         sv.getBuilder()
                 .setDisplayViewCount(3)
@@ -172,18 +183,25 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     {
         if(someValue.containsKey("Settings"))
         {
-            minAge = someValue.getBundle("Settings").getInt("Min");
-            maxAge = someValue.getBundle("Settings").getInt("Max");
-            maxDis = someValue.getBundle("Settings").getInt("MaxDis");
+          reset=someValue.getBoolean("Reset",false);
+          Log.d("Test", "The settings: "+minAge+" "+maxAge+" "+range);
+          if(minAge!=someValue.getInt("Min",18)||maxAge!=someValue.getInt("Max",100)||range!=someValue.getInt("Months",3))
+          {
+            minAge=someValue.getInt("Min",18);
+            maxAge=someValue.getInt("Max",100);
+            range=someValue.getInt("Months",3);
+            Log.d("Test", "The settings: "+minAge+" "+maxAge+" "+range);
+            setMatches(reset);
+          }
         }
         if(someValue.containsKey("Lat")&&myLat!=someValue.getDouble("Lat"))
         {
             myLat = someValue.getDouble("Lat");
             myLng = someValue.getDouble("Lng");
+            Log.d("Numbers", ""+minAge+" "+maxAge+" "+someValue.getBoolean("restart")+" D:"+maxDis+" Lat: "+myLat+" Lng: "+myLng);
+            setMatches(true);
         }
-        Log.d("Numbers", ""+minAge+" "+maxAge+" "+someValue.getBoolean("restart")+" D:"+maxDis+" Lat: "+myLat+" Lng: "+myLng);
-
-        setMatches(true);
+        
     }
     @Override
     public void onAttach(Context context){

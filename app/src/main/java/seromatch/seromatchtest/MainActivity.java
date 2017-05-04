@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements Settings_Tab.Inte
         super.onPause();
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED)
         {
+            Log.d("Test",data.getInt("Months")+"");
+            fragmentCommunicator.passDataToFragment(data);
             locationManager.removeUpdates(locationListener);
         }
     }

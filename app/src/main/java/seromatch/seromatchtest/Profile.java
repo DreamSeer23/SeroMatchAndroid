@@ -16,6 +16,18 @@ public class Profile {
     @Expose
     private Integer age;
 
+    @SerializedName("Months")
+    @Expose
+    private int months;
+
+    @SerializedName("lat")
+    @Expose
+    private double lat;
+
+    @SerializedName("lng")
+    @Expose
+    private double lng;
+
     @SerializedName("location")
     @Expose
     private String location;
@@ -51,4 +63,31 @@ public class Profile {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public int getMonths() {
+        return months;
+    }
+
+    public void setMonths(int location) {
+        this.months = months;
+    }
+
+    public double getlat() {
+        return lat;
+    }
+
+    public void setlat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getlng() {
+        return lng;
+    }
+
+    public void setlng(double lng) {
+        this.lng = lng;
+    }
+
+
+
 }
