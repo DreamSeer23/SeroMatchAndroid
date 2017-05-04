@@ -19,9 +19,11 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
     ActualNumberPicker mPicker;
     private InterfaceDataCommunicator interfaceDataCommunicator;
     ActualNumberPicker mPicker2;
-    int minAge;
-    int maxAge;
-    int rangeMonth;
+
+    private int minAge;
+    private int maxAge;
+    private int rangeMonth;
+    private int maxDis;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -34,9 +36,12 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
         mPicker2.setMinValue(51);
         Spinner range=(Spinner) v.findViewById(R.id.testingRange);
         range.setOnItemSelectedListener(this);
+        rangeMonth=3;
+        Spinner distance=(Spinner) v.findViewById(R.id.Radiusdropdown);
+        distance.setOnItemSelectedListener(this);
         minAge=18;
         maxAge=100;
-        rangeMonth=3;
+        maxDis=20;
         return v;
     }
     public interface InterfaceDataCommunicator
@@ -46,8 +51,8 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
     @Override
     public void onValueChanged(int oldValue, int newValue)
     {
-        int minA = mPicker.getValue();
-        int maxA = mPicker2.getValue();
+        minAge = mPicker.getValue();
+        maxAge = mPicker2.getValue();
         if((!(maxAge <=mPicker.getMinValue()))&&mPicker2.getValue()!=mPicker.getMaxValue())
             mPicker.setMaxValue(maxAge);
         else if((!(minAge >=mPicker2.getMaxValue()))&&mPicker.getValue()!=mPicker2.getMinValue())
@@ -60,12 +65,13 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
 
     private void rebuild()
     {
-        Bundle b=new Bundle(4);
+        Bundle b=new Bundle(5);
         b.putInt("Min", minAge);
         b.putInt("Max", maxAge);
         b.putInt("Months",rangeMonth);
         Log.d("Test","+1 "+rangeMonth);
         b.putBoolean("Reset",true);
+        b.putInt("MaxDis", maxDis);
         interfaceDataCommunicator.updateData(b);
 
     }
@@ -75,6 +81,11 @@ public class Settings_Tab extends Fragment implements OnValueChangeListener, Ada
         {
             Log.d("Test",pos+""+Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]));
             rangeMonth = Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]);
+        }
+         else if(parent.getItemAtPosition(pos).toString().contains("Miles"))
+        {
+            Log.d("Test",pos+""+Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]));
+            maxDis = Integer.parseInt(parent.getItemAtPosition(pos).toString().split(" ")[0]);
         }
         rebuild();
     }

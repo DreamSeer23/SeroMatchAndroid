@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
+import java.util.List;
+
 public class SwipeView extends Fragment implements FragmentCommunicator
 {
 
@@ -26,11 +28,16 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     protected int numOfMatches;
     private int minAge;
     private int maxAge;
+    private int maxDis;
    // Button b;
     private GestureDetectorCompat mDetector;
     private int range;
     private boolean reset;
-
+    private double myLat;
+    private double myLng;
+    private boolean changedLoc;
+    private double oldLat;
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -44,9 +51,12 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         maxAge=100;
         range=3;
         starting=true;
+        maxDis=20;
         setupSV();
+        myLat=0;
+        oldLat=0;
         v.setOnTouchListener(mOnListTouchListener);
-        setMatches(false);
+        //setMatches(false);
         return v;
     }
 
@@ -54,18 +64,44 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     {
         if (restart)
         {
+            Log.d("Numbers", "Reseting " + numOfMatches);
             removeMatches();
             Log.d("Test", "Removing: C2");
         }
         else
         {
+            Utils u=new Utils();
+            List<Profile> test=u.loadProfiles(mContext);
+            Log.d("Test","Lat/Lng "+myLat+"/"+myLng);
             for (Profile profile : Utils.loadProfiles(mContext))
             {
-                Log.d("Test", "Number: C2 " + numOfMatches+" "+profile.getMonths());
-                if ((profile.getAge() >= minAge && profile.getAge() <= maxAge)&&profile.getMonths()<=range) {
-                    numOfMatches++;
-                    Log.d("Test", "Number: C " + numOfMatches+" "+profile.getMonths());
-                    sv.addView(new MatchCard(mContext, profile, sv));
+
+                if ((profile.getAge() >= minAge && profile.getAge() <= maxAge)&&profile.getMonths()<=range)
+                {
+                    if(myLat!=0)
+                    {
+                        oldLat=myLat;
+                        //Only do this once
+                        List<Double> temp= u.distance(test.get(i).getLocation());
+                        Log.d("Test","Got the array: "+temp.size());
+                        //Resume here
+                        double dis;
+                        dis= u.distanceTotal(profile.getLat(),profile.getLng(), myLat, myLng, 0, 0);
+                        if (dis <= maxDis) {
+                            Log.d("Test", "Pass: Dis: " + dis + " Max Dis: " + maxDis);
+                            Log.d("Numbers", "Number: C1 " + numOfMatches);
+                            numOfMatches++;
+                            sv.addView(new MatchCard(mContext, test.get(i), sv));
+                        } else
+                            Log.d("Test", "Fail: Dis: " + dis + " Max Dis: " + maxDis);
+                    }
+                    else
+                    {
+                        Log.d("Test", "Fail:");
+                        numOfMatches++;
+                         Log.d("Numbers", "Number: C " + numOfMatches);
+                        sv.addView(new MatchCard(mContext, test.get(i), sv));
+                    }
                 }
             }
         }
@@ -75,10 +111,9 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     {
         if(numOfMatches>0)
         {
-            //Will change to add flag
-            Log.d("Test", "Number: T" + numOfMatches);
+            //Will change to add flag so it wont remove the person from possible matches
+            Log.d("Numbers", "Number: T" + numOfMatches);
             sv.doSwipe(false);
-            //Change this to make it faster; Might not be able to do this
             new CountDownTimer((int) (2.25 * 200), 200) {
                 public void onTick(long millisUntilFinished) {
                 }
@@ -86,7 +121,7 @@ public class SwipeView extends Fragment implements FragmentCommunicator
                 public void onFinish()
                 {
                     numOfMatches--;
-                   // Log.d("Test", "Number: F" + numOfMatches);
+                    Log.d("Numbers", "Number: F" + numOfMatches);
                     removeMatches();
                 }
             }.start();
@@ -94,8 +129,9 @@ public class SwipeView extends Fragment implements FragmentCommunicator
         else
         {
             setupSV();
-           // Log.d("Test","0: "+numOfMatches);
+            Log.d("Numbers","0: "+numOfMatches);
             setMatches(false);
+
         }
 
     }
@@ -145,18 +181,27 @@ public class SwipeView extends Fragment implements FragmentCommunicator
     @Override
     public void passDataToFragment(Bundle someValue)
     {
-
-
-        reset=someValue.getBoolean("Reset",false);
-        Log.d("Test", "The settings: "+minAge+" "+maxAge+" "+range);
-        if(minAge!=someValue.getInt("Min",18)||maxAge!=someValue.getInt("Max",100)||range!=someValue.getInt("Months",3))
+        if(someValue.containsKey("Settings"))
         {
+          reset=someValue.getBoolean("Reset",false);
+          Log.d("Test", "The settings: "+minAge+" "+maxAge+" "+range);
+          if(minAge!=someValue.getInt("Min",18)||maxAge!=someValue.getInt("Max",100)||range!=someValue.getInt("Months",3))
+          {
             minAge=someValue.getInt("Min",18);
             maxAge=someValue.getInt("Max",100);
             range=someValue.getInt("Months",3);
             Log.d("Test", "The settings: "+minAge+" "+maxAge+" "+range);
             setMatches(reset);
+          }
         }
+        if(someValue.containsKey("Lat")&&myLat!=someValue.getDouble("Lat"))
+        {
+            myLat = someValue.getDouble("Lat");
+            myLng = someValue.getDouble("Lng");
+            Log.d("Numbers", ""+minAge+" "+maxAge+" "+someValue.getBoolean("restart")+" D:"+maxDis+" Lat: "+myLat+" Lng: "+myLng);
+            setMatches(true);
+        }
+        
     }
     @Override
     public void onAttach(Context context){
