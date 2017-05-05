@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements Settings_Tab.Inte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Bottom Tabs
+        //Gotten From http://www.truiton.com/2015/06/android-tabs-example-fragments-viewpager/
         TabLayout tabLayoutBottom = (TabLayout) findViewById(R.id.bottom_tab_layout);
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_community));
         tabLayoutBottom.addTab(tabLayoutBottom.newTab().setIcon(R.drawable.ic_profile_match));
